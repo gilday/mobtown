@@ -1,4 +1,9 @@
 /* root component `mobtown` defines cascading styles from bulma framework */
 
 /* import all of bulma (todo only import the pieces needed for this component) */
-@import "~bulma/bulma"
+$orange: rgb(251, 79, 20);
+$primary: $orange;
+@import "~bulma/bulma";
+/* import font-awesome */
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";

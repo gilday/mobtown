@@ -6,7 +6,6 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.scss$/,
-      exclude: /node_modules/,
       loader: 'style-loader!css-loader!sass-loader'
     }, {
       test: /\.js$/,
@@ -14,8 +13,10 @@ module.exports = {
       loader: 'babel-loader'
     }, {
       test: /\.html$/,
-      exclude: /node_modules/,
       loader: 'raw-loader'
+    }, {
+      test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+      loader: 'file-loader'
     }]
   },
   output: {
