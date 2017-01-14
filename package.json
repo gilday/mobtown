@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "mkdir -p build && webpack",
-    "start": "webpack-dev-server --colors --port 8000",
+    "start": "webpack-dev-server -d --colors --port 8000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Johnathan Gilday",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "bulma": "^0.3.0",
+    "d3": "^4.4.1",
     "font-awesome": "^4.7.0"
   }
 }
