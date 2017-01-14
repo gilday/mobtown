@@ -5,6 +5,10 @@ module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   module: {
     loaders: [{
+      test: /\.scss$/,
+      exclude: /node_modules/,
+      loader: 'style-loader!css-loader!sass-loader'
+    }, {
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader'
