@@ -1,14 +1,8 @@
-<div class="columns">
-    <div class="column is-one-third">
-        <h1 class="title">What Kind of Events Are We Talking About? 🤔</h1>
-        <div class="content">
-            <p>Many of Baltimore's events are categorized as {{ $ctrl.categories[0] }}, but other prominent categories include</p>
-            <ol>
-                <li data-ng-repeat="category in ($ctrl.categories | limitTo : 8 : 1)">{{ category }}</li>
-            </ol>
-        </div>
-    </div>
-    <div class="column">
-        <chartist class="ct-chart ct-major-sixth is-inverted" chartist-data="$ctrl.data" chartist-chart-type="Pie" chartist-chart-options="$ctrl.options"></chartist>
-    </div>
+<h1 class="title">What Kind of Events Are We Talking About? 🤔</h1>
+<h2 class="subtitle">Many of Baltimore's events are categorized as {{ $ctrl.categories[0] }}, but other prominent categories include</h2>
+<div class="content">
+    <ol>
+        <li data-ng-repeat="category in ($ctrl.categories | limitTo : 8 : 1)">{{ category }}</li>
+    </ol>
 </div>
+<chartist class="ct-chart ct-major-eleventh is-inverted" chartist-data="$ctrl.data" chartist-chart-type="Pie" chartist-chart-options="$ctrl.options"></chartist>
