@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
@@ -23,5 +24,10 @@ module.exports = {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js'
   },
-  plugins: [new HtmlWebpackPlugin()]
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new webpack.DefinePlugin({
+      MOBTOWN_GMAPS_API_KEY: process.env.MOBTOWN_GMAPS_API_KEY
+    })
+  ]
 }

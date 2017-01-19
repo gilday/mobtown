@@ -1,35 +1,50 @@
-<div>
-    <header>
-        <div class="hero is-primary">
-            <div class="hero-head">
-                <div class="nav">
-                    <div class="container">
-                        <div class="nav-left">
-                            <a class="nav-item">Mobtown</a>
-                        </div>
-                        <div class="nav-right nav-menu">
-                            <a class="nav-item">Home</a>
-                            <a class="nav-item">Admin</a>
-                            <span class="nav-item">
-                                <a class="button is-primary is-inverted">
-                                    <span class="icon">
-                                        <i class="fa fa-github"></i>
-                                    </span>
-                                    <span>Source</span>
-                                </a>
-                            </span>
-                        </div>
+<header>
+    <div class="hero is-primary">
+        <div class="hero-head">
+            <div class="nav">
+                <div class="container">
+                    <div class="nav-left">
+                        <a class="nav-item">Mobtown</a>
+                    </div>
+                    <div class="nav-right nav-menu">
+                        <a class="nav-item">Home</a>
+                        <a class="nav-item">Admin</a>
+                        <span class="nav-item">
+                            <a class="button is-primary is-inverted">
+                                <span class="icon">
+                                    <i class="fa fa-github"></i>
+                                </span>
+                                <span>Source</span>
+                            </a>
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">Before "Charm City", Baltimore was "Mobtown"<br><small class="subtitle">a data driven analysis of Baltimore events</small><h1>
-                </div>
+        </div>
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">Before "Charm City", Baltimore was "Mobtown"<br><small class="subtitle">a data driven analysis of events in Baltimore</small></h1>
             </div>
         </div>
-    </header>
-    <div class="container is-fluid">
+    </div>
+</header>
+<section class="section">
+    <div class="container">
+        <categories></categories>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
         <month-histogram></month-histogram>
     </div>
-</div>
+</section>
+<section class="section">
+    <div class="container">
+        <rowdiest-events></rowdiest-events>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <search-events></search-events>
+    </div>
+</section>

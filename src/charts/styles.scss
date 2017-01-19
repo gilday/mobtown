@@ -1,0 +1,28 @@
+$ct-bar-width: 20px;
+
+@import "../branding";
+@import "~chartist/dist/scss/chartist";
+
+.ct-series-a .ct-bar {
+    stroke: $orange;
+}
+.ct-series-a .ct-slice-pie {
+    fill: darken($orange, 20%);
+}
+.ct-series-b .ct-slice-pie {
+    fill: darken($orange, 10%);
+}
+.ct-series-c .ct-slice-pie {
+    fill: $orange;
+}
+.ct-series-d .ct-slice-pie {
+    fill: lighten($orange, 10%);
+}
+.ct-series-e .ct-slice-pie {
+    fill: lighten($orange, 20%);
+}
+
+.ct-chart.is-inverted text {
+    font-size: 1em;
+    fill: #fff;
+}

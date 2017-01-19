@@ -1,0 +1,18 @@
+<div class="columns">
+    <div class="column is-one-third">
+        <h1 class="title">Rowdiest Events 🚨</h1>
+        <p>These events coincide with the highest number of citations</p>
+    </div>
+    <div class="column">
+        <div class="columns is-multiline">
+            <div class="column is-4" data-ng-repeat="event in $ctrl.events">
+                <div class="card">
+                    <div class="has-text-centered rowdy-event-citations">
+                        <p>{{ event.citations }}</p>
+                    </div>
+                    <div class="card-content has-text-centered rowdy-event-name">{{ event.name }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
