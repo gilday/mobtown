@@ -1,10 +1,15 @@
 const template = require('./search-events.tpl.html')
 
 class SearchEventsController {
+  constructor (events) {
+    this.events = events
+  }
+
   $onInit () {
-    // start by displaying all the events
+    // start by displaying all the events sorted by permit ID
     this.results = this.events
-    this.selected = { name: 'None Selected' }
+    this.sortBy = 'permitID'
+    this.reverse = false
   }
 
   onKeywordChanged () {
@@ -12,8 +17,18 @@ class SearchEventsController {
     this.results = this.events.filter(e => re.test(e.name))
   }
 
-  onEventSelected (event) {
-    this.selected = event
+  select (event) {
+    console.log('selected event ', event)
+  }
+
+  sort (sortBy) {
+    if (this.sortBy === sortBy) {
+      // change direction
+      this.reverse = !this.reverse
+    } else {
+      // sort by new column
+      this.sortBy = sortBy
+    }
   }
 }
 
@@ -21,6 +36,6 @@ module.exports = {
   bindings: {
     events: '<'
   },
-  controller: SearchEventsController,
+  controller: ['events', SearchEventsController],
   template
 }

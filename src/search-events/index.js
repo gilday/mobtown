@@ -1,6 +1,7 @@
 const angular = require('angular')
 const mapComponent = require('./map.component')
 const searchEventsComponent = require('./search-events.component')
+require('./styles.scss')
 
 const search = angular
   .module('mobtown.search', [])

@@ -1,36 +1,36 @@
 <h1 class="title">Explore Baltimore's Events 🗺️</h1>
 <h2 class="subtitle">Explore the events database and view individual events on the map</h2>
-<div class="columns">
-    <div class="column is-one-third">
-        <div class="panel">
-            <p class="panel-heading">Events Database</p>
-            <div class="panel-block">
-                <p class="control has-icon">
-                    <input class="input is-small" type="text" placeholder="Search"
-                        data-ng-model="$ctrl.keyword"
-                        data-ng-model-options="{debounce: 200}"
-                        data-ng-change="$ctrl.onKeywordChanged()">
-                  <span class="icon is-small">
-                    <i class="fa fa-search"></i>
-                  </span>
-                </p>
-            </div>
-            <a class="panel-block is-active" data-ng-repeat="event in $ctrl.results | limitTo : 12" data-ng-click="$ctrl.onEventSelected(event)">{{ event.name }}</a>
-        </div>
-    </div>
-    <div class="column">
-        <div class="card">
-            <header class="card-header">
-                <p class="card-header-title">{{ $ctrl.selected.name }}</p>
-            </header>
-            <div class="card-image">
-                <map></map>
-            </div>
-            <div class="card-content">
-                <p>{{ $ctrl.selected.type }}</p>
-                <p>{{ $ctrl.selected.start | date:'longDate' }}<span data-ng-show="$ctrl.selected.start.getTime() !== $ctrl.selected.end.getTime()"> - {{ $ctrl.selected.end | date:'longDate' }}</span></p>
-                <p>{{ $ctrl.location }}</p>
-            </div>
-        </div>
-    </div>
+<map></map>
+<div>
+    <p class="control has-icon">
+        <input class="input" type="text" placeholder="Search"
+            data-ng-model="$ctrl.keyword"
+            data-ng-model-options="{debounce: 200}"
+            data-ng-change="$ctrl.onKeywordChanged()">
+      <span class="icon is-small">
+        <i class="fa fa-search"></i>
+      </span>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th><a data-ng-click="$ctrl.sort('permitID')">Permit ID</a></th>
+                <th><a data-ng-click="$ctrl.sort('name')">Name</a></th>
+                <th><a data-ng-click="$ctrl.sort('start')">Start</a></th>
+                <th><a data-ng-click="$ctrl.sort('end')">End</a></th>
+                <th><a data-ng-click="$ctrl.sort('address')">Address</a></th>
+                <th><a data-ng-click="$ctrl.sort('citationsCount')">Citations Count</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="event in $ctrl.results | orderBy : $ctrl.sortBy : $ctrl.reverse">
+                <td>{{ event.permitID }}</td>
+                <td><a data-ng-click="$ctrl.select(event)">{{ event.name }}</a></td>
+                <td>{{ event.start | date : 'longDate' }}</td>
+                <td>{{ event.end | date : 'longDate' }}</td>
+                <td>{{ event.address }}</td>
+                <td>{{ event.citationsCount }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
