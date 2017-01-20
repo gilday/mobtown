@@ -3,7 +3,6 @@ const template = require('./map.tpl.html')
 
 class MapController {
   constructor () {
-    console.log(config)
     this.gmapsAPIKey = config.gmapsAPIKey
   }
 }

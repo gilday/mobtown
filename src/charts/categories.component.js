@@ -1,9 +1,8 @@
-const data = require('../fake-data')
 const template = require('./categories.tpl.html')
 
 class CategoriesController {
-  constructor () {
-    const series = data.map(d => d.type).reduce((series, type) => {
+  $onInit () {
+    const series = this.events.map(d => d.type).reduce((series, type) => {
       series.set(type, (series.has(type) ? series.get(type) : 0) + 1)
       return series
     }, new Map())
@@ -23,6 +22,9 @@ class CategoriesController {
 }
 
 module.exports = {
-  template,
-  controller: CategoriesController
+  bindings: {
+    events: '<'
+  },
+  controller: CategoriesController,
+  template
 }

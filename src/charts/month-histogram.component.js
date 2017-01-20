@@ -1,12 +1,11 @@
-const data = require('../fake-data')
 const template = require('./month-histogram.tpl.html')
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'Juyl', 'August', 'September', 'October', 'November', 'December']
 const abbreviations = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 class MonthHistogramController {
-  constructor () {
-    const starts = data.map(d => d.start.getMonth())
+  $onInit () {
+    const starts = this.events.map(d => d.start.getMonth())
     const series = starts.reduce((series, month) => {
       series[month] += 1
       return series
@@ -35,6 +34,9 @@ function maxIndex (arry) {
 }
 
 module.exports = {
-  template,
-  controller: MonthHistogramController
+  bindings: {
+    events: '<'
+  },
+  controller: MonthHistogramController,
+  template
 }
