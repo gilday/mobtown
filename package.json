@@ -30,6 +30,7 @@
     "angular-ui-router": "^1.0.0-rc.1",
     "bulma": "^0.3.0",
     "chartist": "^0.10.1",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "ngmap": "^1.17.8"
   }
 }

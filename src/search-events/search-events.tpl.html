@@ -1,6 +1,6 @@
 <h1 class="title">Explore Baltimore's Events 🗺️</h1>
 <h2 class="subtitle">Explore the events database and view individual events on the map</h2>
-<map></map>
+<ui-view></ui-view>
 <div>
     <p class="control has-icon">
         <input class="input" type="text" placeholder="Search"
@@ -25,7 +25,7 @@
         <tbody>
             <tr data-ng-repeat="event in $ctrl.results | orderBy : $ctrl.sortBy : $ctrl.reverse">
                 <td>{{ event.permitID }}</td>
-                <td><a data-ng-click="$ctrl.select(event)">{{ event.name }}</a></td>
+                <td><a ui-sref="home.event({ permitID: event.permitID })">{{ event.name }}</a></td>
                 <td>{{ event.start | date : 'longDate' }}</td>
                 <td>{{ event.end | date : 'longDate' }}</td>
                 <td>{{ event.address }}</td>

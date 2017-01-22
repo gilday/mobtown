@@ -1,10 +1,20 @@
-module.exports = ['$stateProvider', function ($stateProvider) {
+module.exports = ['$stateProvider', function initializeStateProvider ($stateProvider) {
   $stateProvider.state({
     name: 'home',
-    url: '',
     component: 'home',
+    url: '',
     resolve: {
-      events: ['events', events => events.all()]
+      events: ['eventsService', events => events.all()]
+    }
+  })
+  $stateProvider.state({
+    name: 'home.event',
+    component: 'mtMap',
+    params: {
+      permitID: undefined
+    },
+    resolve: {
+      event: ['eventsService', '$transition$', (events, $transition$) => events.get($transition$.params().permitID)]
     }
   })
 }]

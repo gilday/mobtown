@@ -27,7 +27,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({
-      MOBTOWN_GMAPS_API_KEY: process.env.MOBTOWN_GMAPS_API_KEY
+      MOBTOWN_GMAPS_API_KEY: JSON.stringify(process.env.MOBTOWN_GMAPS_API_KEY)
     })
   ]
 }

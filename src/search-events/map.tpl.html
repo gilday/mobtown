@@ -1,1 +1,6 @@
-<img class="map" alt="map placeholder" src="http://placehold.it/1100x450">
+<div map-lazy-load="https://maps.google.com/maps/api/js">
+    <ng-map center="{{ $ctrl.event.position }}" zoom="{{ $ctrl.zoom }}">
+        <marker position="{{ $ctrl.event.position }}" title="{{ $ctrl.event.name }}"></marker>
+        <marker ng-repeat="citation in $ctrl.event.citations" position="{{ citation.position }}"></marker>
+    </ng-map>
+</div>

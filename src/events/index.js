@@ -3,6 +3,6 @@ const events = require('./events.service')
 
 const charts = angular
   .module('mobtown.events', [])
-  .factory('events', events)
+  .factory('eventsService', events)
 
 module.exports = charts.name

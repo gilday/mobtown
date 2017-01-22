@@ -6,7 +6,7 @@ require('./styles.scss')
 
 const charts = angular
   .module('mobtown.charts', [ngChartist])
-  .component('monthHistogram', monthHistogram)
-  .component('categories', categories)
+  .component('mtMonthHistogram', monthHistogram)
+  .component('mtCategories', categories)
 
 module.exports = charts.name

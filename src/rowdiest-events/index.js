@@ -3,6 +3,6 @@ const component = require('./rowdiest-events.component')
 
 const rowdiest = angular
   .module('mobtown.rowdiest', [])
-  .component('rowdiestEvents', component)
+  .component('mtRowdiestEvents', component)
 
 module.exports = rowdiest.name

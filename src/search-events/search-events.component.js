@@ -1,10 +1,6 @@
 const template = require('./search-events.tpl.html')
 
 class SearchEventsController {
-  constructor (events) {
-    this.events = events
-  }
-
   $onInit () {
     // start by displaying all the events sorted by permit ID
     this.results = this.events
@@ -17,8 +13,18 @@ class SearchEventsController {
     this.results = this.events.filter(e => re.test(e.name))
   }
 
-  select (event) {
-    console.log('selected event ', event)
+  onSelect (event) {
+    if (this.map) {
+      const id = event.permitID
+      console.log('display event ID ', id)
+    }
+  }
+
+  /**
+   * sets a reference to a map directive
+   */
+  setMap (map) {
+    this.map = map
   }
 
   sort (sortBy) {
@@ -36,6 +42,6 @@ module.exports = {
   bindings: {
     events: '<'
   },
-  controller: ['events', SearchEventsController],
+  controller: SearchEventsController,
   template
 }
