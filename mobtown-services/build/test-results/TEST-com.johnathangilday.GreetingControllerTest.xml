@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.johnathangilday.GreetingControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-01-25T02:48:38" hostname="jgilday-macbook.local" time="3.721">
+  <properties/>
+  <testcase name="it_returns_default_greeting" classname="com.johnathangilday.GreetingControllerTest" time="3.721"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Jan 24, 2017 9:48:38 PM org.glassfish.jersey.test.jdkhttp.JdkHttpServerTestContainerFactory$JdkHttpServerTestContainer <init>
+INFO: Creating JdkHttpServerTestContainer configured at the base URI http://localhost:<AVAILABLE-PORT>/
+Jan 24, 2017 9:48:38 PM org.glassfish.jersey.test.jdkhttp.JdkHttpServerTestContainerFactory$JdkHttpServerTestContainer start
+INFO: Started JdkHttpServerTestContainer at the base URI http://localhost:64376/
+]]></system-err>
+</testsuite>

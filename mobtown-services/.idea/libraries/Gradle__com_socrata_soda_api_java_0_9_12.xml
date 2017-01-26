@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.socrata:soda-api-java:0.9.12">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.socrata/soda-api-java/0.9.12/e756b9cede78ac0635d6209ff085dae69f702669/soda-api-java-0.9.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.socrata/soda-api-java/0.9.12/c4aed0206a5f81710ae3a7c66ba54d0ef2e9feb3/soda-api-java-0.9.12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
