@@ -1,6 +1,7 @@
 package com.johnathangilday.jaxrs;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.inject.Inject;
 import javax.ws.rs.Produces;

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.johnathangilday.GreetingJsonTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-01-25T02:48:41" hostname="jgilday-macbook.local" time="0.003">
-  <properties/>
-  <testcase name="it_creates_greetings_from_json" classname="com.johnathangilday.GreetingJsonTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

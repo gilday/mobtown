@@ -1,7 +1,7 @@
 package com.johnathangilday;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.glassfish.hk2.api.Factory;
 
 /**
@@ -12,7 +12,7 @@ public class ObjectMapperFactory implements Factory<ObjectMapper> {
     @Override
     public ObjectMapper provide() {
         return new ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                .configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     @Override

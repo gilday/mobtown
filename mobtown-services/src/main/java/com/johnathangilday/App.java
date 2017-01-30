@@ -1,6 +1,6 @@
 package com.johnathangilday;
 
-import com.johnathangilday.jaxrs.GreetingResourceConfig;
+import com.johnathangilday.jaxrs.MobtownResourceConfig;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.eclipse.jetty.server.Server;
@@ -15,7 +15,7 @@ import java.net.URI;
 import java.util.Optional;
 
 /**
- * Point of entry. Configure and start webapp
+ * Point of entry. Configure and start mobtown-services
  */
 public class App {
 
@@ -26,7 +26,7 @@ public class App {
 
         final int port = config.getInt("port");
         final URI baseUri = UriBuilder.fromUri("http://localhost/").port(port).build();
-        final GreetingResourceConfig app = new GreetingResourceConfig();
+        final MobtownResourceConfig app = new MobtownResourceConfig();
 
         // start jetty
         logger.info("listening on port {}", port);

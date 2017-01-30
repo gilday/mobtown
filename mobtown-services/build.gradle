@@ -26,13 +26,12 @@ ext {
     ]
 }
 
-
 dependencies {
     // hibernate
     compile "org.hibernate:hibernate-core:$versions.hibernate"
     // jackson
-    compile  "com.fasterxml.jackson.core:jackson-core:$versions.jackson"
-    compile  "com.fasterxml.jackson.core:jackson-databind:$versions.jackson"
+//    compile  "com.fasterxml.jackson.core:jackson-core:$versions.jackson"
+//    compile  "com.fasterxml.jackson.core:jackson-databind:$versions.jackson"
     // jersey
     compile  "org.glassfish.jersey.core:jersey-server:$versions.jersey"
     compile ("org.glassfish.jersey.containers:jersey-container-jetty-http:$versions.jersey")
@@ -41,6 +40,8 @@ dependencies {
     }
     // jetty
     compile "org.eclipse.jetty:jetty-server:$versions.jetty"
+    // rxjava
+    compile 'io.reactivex.rxjava2:rxjava:2.0.4'
     // socrata
     compile 'com.socrata:soda-api-java:0.9.12'
     // slf4j
@@ -58,12 +59,17 @@ dependencies {
         exclude group: 'javax.servlet'
     }
     testCompile "org.glassfish.jersey.containers:jersey-container-jdk-http:$versions.jersey"
+    testCompile 'org.apache.derby:derby:10.13.1.1'
 }
 
 jar {
     manifest {
         attributes("Main-Class": "com.johnathangilday.App")
     }
+}
+
+processTestResources {
+    expand (ddl: "${sourceSets.test.output.resourcesDir}/ddl")
 }
 
 shadowJar {
