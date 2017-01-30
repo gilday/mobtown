@@ -16,7 +16,7 @@ public class OpenBaltimoreIngestTests {
     @Before
     public void before() {
         repository = new FakeSpecialEventRepository();
-        ingest = new OpenBaltimoreIngest(repository);
+        ingest = new OpenBaltimoreIngest(repository, null /* consumer */);
     }
 
     @Test

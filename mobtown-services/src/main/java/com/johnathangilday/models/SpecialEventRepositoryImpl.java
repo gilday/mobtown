@@ -2,6 +2,8 @@ package com.johnathangilday.models;
 
 import io.reactivex.Observable;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
@@ -9,11 +11,13 @@ import javax.persistence.criteria.CriteriaQuery;
 /**
  * implementation of {@link SpecialEventRepository} backed by JPA
  */
+@Named
 public class SpecialEventRepositoryImpl implements SpecialEventRepository {
 
     private final EntityManager em;
     private final TypedQuery<SpecialEvent> allQuery;
 
+    @Inject
     public SpecialEventRepositoryImpl(final EntityManager em) {
         this.em = em;
         final CriteriaQuery<SpecialEvent> criteria = em.getCriteriaBuilder().createQuery(SpecialEvent.class);

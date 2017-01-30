@@ -1,6 +1,6 @@
 package com.johnathangilday.jaxrs;
 
-import com.johnathangilday.MobtownBinder;
+import org.glassfish.hk2.utilities.Binder;
 import org.glassfish.jersey.server.ResourceConfig;
 
 /**
@@ -8,10 +8,11 @@ import org.glassfish.jersey.server.ResourceConfig;
  */
 public class MobtownResourceConfig extends ResourceConfig {
 
-    public MobtownResourceConfig() {
-        register(new MobtownBinder());
+    public MobtownResourceConfig(final Binder module) {
+        register(module);
         register(SpecialEventsController.class);
         register(EventNotFoundExceptionMapper.class);
         register(ObjectMapperProvider.class);
+        register(DatabaseInitializer.class);
     }
 }

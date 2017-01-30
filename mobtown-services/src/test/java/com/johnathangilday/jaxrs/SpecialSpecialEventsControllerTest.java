@@ -1,5 +1,6 @@
 package com.johnathangilday.jaxrs;
 
+import com.johnathangilday.MobtownBinder;
 import com.johnathangilday.models.SpecialEvent;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -16,7 +17,7 @@ public class SpecialSpecialEventsControllerTest extends JerseyTest {
         // this allows us to run parallel tests
         forceSet(TestProperties.CONTAINER_PORT, "0");
 
-        return ResourceConfig.forApplication(new MobtownResourceConfig());
+        return ResourceConfig.forApplication(new MobtownResourceConfig(new MobtownBinder()));
     }
 
     @Test

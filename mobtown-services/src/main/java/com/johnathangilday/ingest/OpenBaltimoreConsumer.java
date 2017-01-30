@@ -3,14 +3,19 @@ package com.johnathangilday.ingest;
 import com.johnathangilday.Pair;
 import io.reactivex.Observable;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 /**
  * Queries {@link SpecialEventPermit} data and associated {@link Arrest} data from Open Baltimore
  */
+@Named
 public class OpenBaltimoreConsumer {
 
     private final SpecialEventPermitsConsumer specialEventPermitsConsumer;
     private final ArrestsConsumer arrestsConsumer;
 
+    @Inject
     public OpenBaltimoreConsumer(
             final SpecialEventPermitsConsumer specialEventPermitsConsumer,
             final ArrestsConsumer arrestsConsumer) {

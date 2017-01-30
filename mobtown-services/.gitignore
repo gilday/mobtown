@@ -1,3 +1,6 @@
+# Derby
+*.log
+
 # IDE
 .idea
 

@@ -68,6 +68,10 @@ jar {
     }
 }
 
+processResources {
+    expand (ddl: "${sourceSets.main.output.resourcesDir}/ddl")
+}
+
 processTestResources {
     expand (ddl: "${sourceSets.test.output.resourcesDir}/ddl")
 }

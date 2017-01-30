@@ -26,9 +26,9 @@ public class App {
 
         final int port = config.getInt("port");
         final URI baseUri = UriBuilder.fromUri("http://localhost/").port(port).build();
-        final MobtownResourceConfig app = new MobtownResourceConfig();
 
         // start jetty
+        final MobtownResourceConfig app = new MobtownResourceConfig(new MobtownBinder());
         logger.info("listening on port {}", port);
         final Server server = JettyHttpContainerFactory.createServer(baseUri, ResourceConfig.forApplication(app));
         try {
@@ -39,7 +39,7 @@ public class App {
         }
     }
 
-    private static Config config() {
+    public static Config config() {
         final Config defaultConfig = ConfigFactory.load();
 
         final Optional<File> externalConfigFile = Optional.ofNullable(System.getProperty("config")).map(File::new);
