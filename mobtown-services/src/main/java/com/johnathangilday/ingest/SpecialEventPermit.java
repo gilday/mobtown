@@ -4,25 +4,35 @@ import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.Objects;
 
 /**
  * Immutable value object representing a Special SpecialEventPermit Permit from Baltimore Open Data
+ *
+ * Uses Jackson 1.x annotations because the socrata-java API uses Jackson 1.x
  */
 public final class SpecialEventPermit {
-
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
 
     @JsonCreator
     public static SpecialEventPermit of(
             @JsonProperty("permit_id") final String permitID,
             @JsonProperty("permit_name_full") final String name,
             @JsonProperty("facility_type") final String type,
-            @JsonProperty("start_date") final String startDate,
-            @JsonProperty("end_date") final String endDate) {
-        final LocalDateTime start = LocalDateTime.parse(startDate, formatter);
-        final LocalDateTime end = LocalDateTime.parse(endDate, formatter);
+            @JsonProperty("start_date") final Date startDate,
+            @JsonProperty("end_date") final Date endDate) {
+        final LocalDateTime start = LocalDateTime.ofInstant(startDate.toInstant(), ZoneOffset.systemDefault());
+        final LocalDateTime end = LocalDateTime.ofInstant(endDate.toInstant(), ZoneOffset.systemDefault());
+        return SpecialEventPermit.of(permitID, name, type, start, end);
+    }
+
+    public static SpecialEventPermit of(
+            final String permitID,
+            final String name,
+            final String type,
+            final LocalDateTime start,
+            final LocalDateTime end) {
         return new SpecialEventPermit(permitID, name, type, start, end);
     }
 

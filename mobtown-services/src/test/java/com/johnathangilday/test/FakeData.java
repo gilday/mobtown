@@ -18,14 +18,14 @@ public class FakeData {
                 "fake-permit-ID",
                 "Sole of the City",
                 "run",
-                "04/25/2015 12:00:00 PM",
-                "04/25/2015 05:00:00 PM");
+                LocalDateTime.of(2015, Month.APRIL, 25, 12, 0, 0),
+                LocalDateTime.of(2015, Month.APRIL, 25, 17, 0, 0));
     }
 
     public static Arrest openBaltimoreArrest() {
         return Arrest.of(
                 "fake-arrest-id",
-                "12/31/2016,23:51",
+                LocalDateTime.of(2016, Month.DECEMBER, 31, 23, 51),
                 "4 3550",
                 "100 S. CLINTON",
                 "Southeastern",

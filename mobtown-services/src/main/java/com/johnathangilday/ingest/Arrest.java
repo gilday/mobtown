@@ -5,22 +5,34 @@ import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.Objects;
 
 /**
  * Immutable value object representing an Arrest result from Baltimore Open Data
+ *
+ * Uses Jackson 1.x annotations because the socrata-java API uses Jackson 1.x
  */
 public class Arrest {
 
     @JsonCreator
     public static Arrest of(@JsonProperty("arrest") final String id,
-                            @JsonProperty("arrestdate") final String arrestdate,
+                            @JsonProperty("arrestdate") final Date arrestdate,
                             @JsonProperty("charge") final String charge,
-                            @JsonProperty("location") final String intersection,
+                            @JsonProperty("arrestlocation") final String intersection,
                             @JsonProperty("name1") final String neighborhood,
                             @JsonProperty("location_1") final Location location) {
-//        final LocalDateTime timestamp = LocalDateTime.parse(arrestdate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        LocalDateTime timestamp = LocalDateTime.now();
+        final LocalDateTime timestamp = LocalDateTime.ofInstant(arrestdate.toInstant(), ZoneOffset.systemDefault());
+        return Arrest.of(id, timestamp, charge, intersection, neighborhood, location);
+    }
+
+    public static Arrest of(final String id,
+                            final LocalDateTime timestamp,
+                            final String charge,
+                            final String intersection,
+                            final String neighborhood,
+                            final Location location) {
         return new Arrest(id, timestamp, charge, intersection, neighborhood, location);
     }
 

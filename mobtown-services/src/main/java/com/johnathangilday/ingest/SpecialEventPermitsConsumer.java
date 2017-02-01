@@ -6,6 +6,7 @@ import com.socrata.model.soql.SoqlQuery;
 import com.sun.jersey.api.client.GenericType;
 import io.reactivex.Observable;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public class SpecialEventPermitsConsumer {
     public Observable<SpecialEventPermit> all() {
         return RxPagingUtil.allPages(offset -> {
             final SoqlQuery query = new SoqlQueryBuilder()
-                    .addSelectPhrase("permit_id")
+                    .addSelectPhrases(Arrays.asList("permit_id", "permit_name_full", "facility_type", "start_date", "end_date"))
                     .setOffset(offset)
                     .setLimit(limit)
                     .build();
