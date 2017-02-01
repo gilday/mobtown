@@ -1,37 +1,8 @@
-group = 'com.johnathangilday'
-version = '0.0.1-SNAPSHOT'
-
-repositories {
-     jcenter()
-}
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
-    }
-}
-
-apply plugin: 'java'
-apply plugin: 'com.github.johnrengelman.shadow'
-
-ext {
-    versions = [
-            hibernate: '5.2.6.Final',
-            jackson: '2.8.5',
-            jersey: '2.25',
-            jetty: '9.4.0.v20161208'
-    ]
-}
-
 dependencies {
-    // hibernate
-    compile "org.hibernate:hibernate-core:$versions.hibernate"
+    compile project(':mobtown-common')
     // jackson
-//    compile  "com.fasterxml.jackson.core:jackson-core:$versions.jackson"
-//    compile  "com.fasterxml.jackson.core:jackson-databind:$versions.jackson"
+    compile  "com.fasterxml.jackson.core:jackson-core:$versions.jackson"
+    compile  "com.fasterxml.jackson.core:jackson-databind:$versions.jackson"
     // jersey
     compile  "org.glassfish.jersey.core:jersey-server:$versions.jersey"
     compile ("org.glassfish.jersey.containers:jersey-container-jetty-http:$versions.jersey")
@@ -41,49 +12,35 @@ dependencies {
     // jetty
     compile "org.eclipse.jetty:jetty-server:$versions.jetty"
     // rxjava
-    compile 'io.reactivex.rxjava2:rxjava:2.0.4'
-    // socrata
-    compile 'com.socrata:soda-api-java:0.9.12'
+    compile "io.reactivex.rxjava2:rxjava:$versions.rxjava"
     // slf4j
-    compile 'org.slf4j:slf4j-api:1.7.22'
+    compile "org.slf4j:slf4j-api:$versions.slf4j"
     compile 'ch.qos.logback:logback-classic:1.1.3'
     // typesafe config
     compile 'com.typesafe:config:1.3.1'
 
     // test
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:3.6.1'
-    testCompile 'org.mockito:mockito-all:1.10.19'
+    testCompile "junit:junit:$versions.junit"
+    testCompile "org.assertj:assertj-core:$versions.assertj"
+    testCompile "org.mockito:mockito-all:$versions.mockito"
     testCompile ("org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-jdk-http:$versions.jersey") {
         exclude group: 'junit'
         exclude group: 'javax.servlet'
     }
     testCompile "org.glassfish.jersey.containers:jersey-container-jdk-http:$versions.jersey"
-    testCompile 'org.apache.derby:derby:10.13.1.1'
 }
 
 jar {
     manifest {
-        attributes("Main-Class": "com.johnathangilday.App")
+        attributes("Main-Class": "mobtown.services.App")
     }
-}
-
-processResources {
-    expand (ddl: "${sourceSets.main.output.resourcesDir}/ddl")
-}
-
-processTestResources {
-    expand (ddl: "${sourceSets.test.output.resourcesDir}/ddl")
 }
 
 shadowJar {
     mergeServiceFiles()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 task(run, dependsOn: 'classes', type: JavaExec) {
-    main = "com.johnathangilday.App"
+    main = "mobtown.services.App"
     classpath = sourceSets.main.runtimeClasspath
 }
