@@ -29,9 +29,7 @@ public class SpecialEvent {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @NotNull
-    @NotEmptyString
-    @Column(name = "TYPE", nullable = false)
+    @Column(name = "TYPE")
     private String type;
 
     @NotNull
@@ -68,12 +66,11 @@ public class SpecialEvent {
         return Collections.unmodifiableList(arrests);
     }
 
-    public void addArrest(final String id,
-                          final String intersection,
+    public void addArrest(final String intersection,
                           final String neighborhood,
                           final LocalDateTime timestamp,
                           final String location) {
-        final Arrest arrest = new Arrest(id, intersection, neighborhood, timestamp, location);
+        final Arrest arrest = new Arrest(intersection, neighborhood, timestamp, location);
         arrests.add(arrest);
     }
 

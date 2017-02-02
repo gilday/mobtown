@@ -1,8 +1,6 @@
 package mobtown.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -11,10 +9,6 @@ import java.util.Objects;
  */
 @Embeddable
 public class Arrest {
-
-    @NotNull
-    @Column(name = "ID", nullable = false)
-    private String id;
 
     @Column(name = "INTERSECTION")
     private String intersection;
@@ -34,20 +28,14 @@ public class Arrest {
     protected Arrest() { }
 
     Arrest(
-            final String id,
             final String intersection,
             final String neighborhood,
             final LocalDateTime timestamp,
             final String location) {
-        this.id = id;
         this.intersection = intersection;
         this.neighborhood = neighborhood;
         this.timestamp = timestamp;
         this.location = location;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getIntersection() {
@@ -71,8 +59,7 @@ public class Arrest {
         if (this == o) return true;
         if (!(o instanceof Arrest)) return false;
         final Arrest arrest = (Arrest) o;
-        return Objects.equals(id, arrest.id) &&
-                Objects.equals(intersection, arrest.intersection) &&
+        return Objects.equals(intersection, arrest.intersection) &&
                 Objects.equals(neighborhood, arrest.neighborhood) &&
                 Objects.equals(timestamp, arrest.timestamp) &&
                 Objects.equals(location, arrest.location);
@@ -80,14 +67,13 @@ public class Arrest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, intersection, neighborhood, timestamp, location);
+        return Objects.hash(intersection, neighborhood, timestamp, location);
     }
 
     @Override
     public String toString() {
         return "Arrest{" +
-                "id='" + id + '\'' +
-                ", intersection='" + intersection + '\'' +
+                "intersection='" + intersection + '\'' +
                 ", neighborhood='" + neighborhood + '\'' +
                 ", timestamp=" + timestamp +
                 ", location='" + location + '\'' +

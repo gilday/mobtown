@@ -1,5 +1,7 @@
 dependencies {
     compile project(':mobtown-common')
+    // jcommander
+    compile "com.beust:jcommander:$versions.jcommander"
     // hk2
     compile "org.glassfish.hk2:hk2:$versions.hk2"
     // rxjava
@@ -8,6 +10,7 @@ dependencies {
     compile 'com.socrata:soda-api-java:0.9.12'
     // slf4j
     compile "org.slf4j:slf4j-api:$versions.slf4j"
+    compile "ch.qos.logback:logback-classic:$versions.logback"
 
     // test
     testCompile "junit:junit:$versions.junit"

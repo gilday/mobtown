@@ -17,39 +17,34 @@ import java.util.Objects;
 public class Arrest {
 
     @JsonCreator
-    public static Arrest of(@JsonProperty("arrest") final String id,
-                            @JsonProperty("arrestdate") final Date arrestdate,
+    public static Arrest of(@JsonProperty("arrestdate") final Date arrestdate,
                             @JsonProperty("charge") final String charge,
                             @JsonProperty("arrestlocation") final String intersection,
                             @JsonProperty("name1") final String neighborhood,
                             @JsonProperty("location_1") final Location location) {
         final LocalDateTime timestamp = LocalDateTime.ofInstant(arrestdate.toInstant(), ZoneOffset.systemDefault());
-        return Arrest.of(id, timestamp, charge, intersection, neighborhood, location);
+        return Arrest.of(timestamp, charge, intersection, neighborhood, location);
     }
 
-    public static Arrest of(final String id,
-                            final LocalDateTime timestamp,
+    public static Arrest of(final LocalDateTime timestamp,
                             final String charge,
                             final String intersection,
                             final String neighborhood,
                             final Location location) {
-        return new Arrest(id, timestamp, charge, intersection, neighborhood, location);
+        return new Arrest(timestamp, charge, intersection, neighborhood, location);
     }
 
-    public final String id;
     public final LocalDateTime timestamp;
     public final String charge;
     public final String intersection;
     public final String neighborhood;
     public final Location location;
 
-    private Arrest(final String id,
-                   final LocalDateTime timestamp,
+    private Arrest(final LocalDateTime timestamp,
                    final String charge,
                    final String intersection,
                    final String neighborhood,
                    final Location location) {
-        this.id = id;
         this.timestamp = timestamp;
         this.charge = charge;
         this.intersection = intersection;
@@ -62,8 +57,7 @@ public class Arrest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Arrest arrest = (Arrest) o;
-        return Objects.equals(id, arrest.id) &&
-                Objects.equals(timestamp, arrest.timestamp) &&
+        return Objects.equals(timestamp, arrest.timestamp) &&
                 Objects.equals(charge, arrest.charge) &&
                 Objects.equals(intersection, arrest.intersection) &&
                 Objects.equals(neighborhood, arrest.neighborhood) &&
@@ -72,14 +66,13 @@ public class Arrest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, timestamp, charge, intersection, neighborhood, location);
+        return Objects.hash(timestamp, charge, intersection, neighborhood, location);
     }
 
     @Override
     public String toString() {
         return "Arrest{" +
-                "id='" + id + '\'' +
-                ", timestamp='" + timestamp + '\'' +
+                "timestamp='" + timestamp + '\'' +
                 ", charge='" + charge + '\'' +
                 ", intersection'" + intersection + '\'' +
                 ", neighborhood='" + neighborhood + '\'' +

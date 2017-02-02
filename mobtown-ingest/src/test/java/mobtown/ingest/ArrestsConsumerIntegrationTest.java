@@ -31,8 +31,7 @@ public class ArrestsConsumerIntegrationTest {
         results.take(1).test()
                 .assertValue(arrest ->
                         arrest.timestamp.toLocalDate().equals(date) &&
-                        Strings.isNotEmpty(arrest.charge) &&
-                        Strings.isNotEmpty(arrest.id))
+                        Strings.isNotEmpty(arrest.charge))
                 .assertNoErrors();
     }
 }

@@ -14,7 +14,7 @@ public class IngestBinderTests {
 
     @Before
     public void before() {
-        locator = ServiceLocatorUtilities.bind(new InMemoryDomainBinder(), new IngestBinder());
+        locator = ServiceLocatorUtilities.bind(new InMemoryDomainBinder(), new IngestBinder(0));
     }
 
     @Test

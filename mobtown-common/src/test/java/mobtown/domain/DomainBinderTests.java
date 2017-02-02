@@ -2,13 +2,11 @@ package mobtown.domain;
 
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.inject.Singleton;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,16 +19,8 @@ public class DomainBinderTests {
 
     @Before
     public void before() {
-        locator = ServiceLocatorUtilities.bind(new DomainBinder(), new AbstractBinder() {
-            @Override
-            protected void configure() {
-                bindFactory(new EntityManagerFactoryHK2Factory("mobtown-test-pu"))
-                        .to(EntityManagerFactory.class)
-                        .in(Singleton.class);
-                bindFactory(EntityManagerHK2Factory.class)
-                        .to(EntityManager.class);
-            }
-        });
+        final EntityManagerFactoryHK2Factory factory = new EntityManagerFactoryHK2Factory("mobtown-test-pu", new Properties());
+        locator = ServiceLocatorUtilities.bind(new DomainBinder(factory));
     }
 
     @Test

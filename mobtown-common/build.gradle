@@ -4,6 +4,8 @@ dependencies {
     compile "org.hibernate:hibernate-validator:$versions.hibernateValidator"
     // hk2
     compile "org.glassfish.hk2:hk2:$versions.hk2"
+    // mysql
+    runtime 'mysql:mysql-connector-java:6.0.5'
     // rxjava
     compile "io.reactivex.rxjava2:rxjava:$versions.rxjava"
     // compile

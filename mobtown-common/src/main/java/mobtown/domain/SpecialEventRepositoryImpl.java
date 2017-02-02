@@ -5,6 +5,7 @@ import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -27,7 +28,13 @@ public class SpecialEventRepositoryImpl implements SpecialEventRepository {
 
     @Override
     public void add(final SpecialEvent event) {
-        em.persist(event);
+        try {
+            em.persist(event);
+        } catch (PersistenceException e) {
+            System.out.println(event);
+            System.out.println(event.getArrests());
+            System.exit(1);
+        }
     }
 
     @Override

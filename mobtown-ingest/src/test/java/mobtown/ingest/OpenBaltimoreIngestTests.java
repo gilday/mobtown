@@ -1,22 +1,25 @@
 package mobtown.ingest;
 
-import mobtown.Pair;
-import mobtown.domain.FakeSpecialEventRepository;
-import mobtown.domain.SpecialEventRepository;
-import mobtown.ingest.test.FakeData;
 import io.reactivex.Observable;
+import mobtown.Pair;
+import mobtown.domain.SpecialEvent;
+import mobtown.ingest.test.FakeData;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.HashSet;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OpenBaltimoreIngestTests {
 
     private OpenBaltimoreIngest ingest;
-    private SpecialEventRepository repository;
+    private FakeSpecialEventDatabase database;
 
     @Before
     public void before() {
-        repository = new FakeSpecialEventRepository();
-        ingest = new OpenBaltimoreIngest(repository, null /* consumer */);
+        database = new FakeSpecialEventDatabase();
+        ingest = new OpenBaltimoreIngest(database, null /* consumer */, 0);
     }
 
     @Test
@@ -32,12 +35,23 @@ public class OpenBaltimoreIngestTests {
         ingest.execute(observable);
 
         // THEN repository has one event record
-        repository.all().test().assertValue(persisted ->
-                persisted.getId().equals(event.id) &&
-                        persisted.getName().equals(event.name) &&
-                        persisted.getType().equals(event.type) &&
-                        persisted.getStart().equals(event.start) &&
-                        persisted.getEnd().equals(event.end) &&
-                        persisted.getArrests().size() == 1);
+        assertThat(database.events).hasSize(1);
+        final SpecialEvent persisted = database.events.iterator().next();
+        assertThat(persisted.getId()).isEqualTo(event.id);
+        assertThat(persisted.getName()).isEqualTo(event.name);
+        assertThat(persisted.getType()).isEqualTo(event.type);
+        assertThat(persisted.getStart()).isEqualTo(event.start);
+        assertThat(persisted.getEnd()).isEqualTo(event.end);
+        assertThat(persisted.getArrests()).hasSize(1);
+    }
+
+    private static class FakeSpecialEventDatabase implements SpecialEventDatabase {
+
+        private final HashSet<SpecialEvent> events = new HashSet<>();
+
+        @Override
+        public void save(final SpecialEvent event) {
+            events.add(event);
+        }
     }
 }

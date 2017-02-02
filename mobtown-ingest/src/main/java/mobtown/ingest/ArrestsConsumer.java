@@ -40,7 +40,7 @@ public class ArrestsConsumer {
         final String iso8601 = date.atStartOfDay().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         return RxPagingUtil.allPages(offset -> {
             final SoqlQuery query = new SoqlQueryBuilder()
-                    .addSelectPhrases(Arrays.asList("arrest", "arrestdate", "arrestlocation", "charge", "location_1", "name1"))
+                    .addSelectPhrases(Arrays.asList("arrestdate", "arrestlocation", "charge", "location_1", "name1"))
                     .setWhereClause(String.format("arrestdate='%s'", iso8601))
                     .setOffset(offset)
                     .setLimit(limit)

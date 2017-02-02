@@ -1,9 +1,8 @@
 package mobtown.ingest;
 
+import io.reactivex.Observable;
 import mobtown.Pair;
 import mobtown.domain.SpecialEvent;
-import mobtown.domain.SpecialEventRepository;
-import io.reactivex.Observable;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,33 +13,45 @@ import javax.inject.Named;
 @Named
 public class OpenBaltimoreIngest {
 
-    private final SpecialEventRepository repository;
+    private final SpecialEventDatabase database;
     private final OpenBaltimoreConsumer consumer;
+    private final int max;
 
+    /**
+     * @param max maximum number of special event items to ingest
+     */
     @Inject
-    public OpenBaltimoreIngest(final SpecialEventRepository repository, final OpenBaltimoreConsumer consumer) {
-        this.repository = repository;
+    public OpenBaltimoreIngest(
+            final SpecialEventDatabase database,
+            final OpenBaltimoreConsumer consumer,
+            @Named("ingest.max") final int max) {
+        this.database = database;
         this.consumer = consumer;
+        this.max = max;
     }
 
-    public void execute() {
-        final Observable<Pair<SpecialEventPermit, Observable<Arrest>>> all = consumer.all();
+    void execute() {
+        final Observable<Pair<SpecialEventPermit, Observable<Arrest>>> all = consumer.all().take(max);
         execute(all);
     }
 
     void execute(final Observable<Pair<SpecialEventPermit, Observable<Arrest>>> events) {
-        events.map(pair -> {
+        events.flatMap(pair -> {
             final SpecialEventPermit obEvent = pair.left;
+            final Observable<Arrest> arrests = pair.right;
+
             final SpecialEvent event = new SpecialEvent(obEvent.id, obEvent.name, obEvent.type, obEvent.start, obEvent.end);
-            pair.right
+            return arrests
+                    .filter(arrest -> arrest.location != null)
                     .take(64)
-                    .forEach(arrest -> event.addArrest(
-                            arrest.id,
-                            arrest.intersection,
-                            arrest.neighborhood,
-                            arrest.timestamp,
-                            "(" + arrest.location.latitude + "," + arrest.location.longitude + ")"));
-            return event;
-        }).forEach(repository::add);
+                    .reduce(event, (specialEvent, arrest) -> {
+                        event.addArrest(
+                                arrest.intersection,
+                                arrest.neighborhood,
+                                arrest.timestamp,
+                                "(" + arrest.location.latitude + "," + arrest.location.longitude + ")");
+                        return event;
+                    }).toObservable();
+        }).forEach(database::save);
     }
 }
