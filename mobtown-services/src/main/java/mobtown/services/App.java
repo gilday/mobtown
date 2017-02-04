@@ -28,7 +28,7 @@ public class App {
         final URI baseUri = UriBuilder.fromUri("http://localhost/").port(port).build();
 
         // start jetty
-        final MobtownResourceConfig app = new MobtownResourceConfig(new MobtownBinder());
+        final MobtownResourceConfig app = new MobtownResourceConfig(MobtownBinder.create());
         logger.info("listening on port {}", port);
         final Server server = JettyHttpContainerFactory.createServer(baseUri, ResourceConfig.forApplication(app));
         try {

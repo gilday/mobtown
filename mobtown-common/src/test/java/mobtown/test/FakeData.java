@@ -18,7 +18,6 @@ public class FakeData {
                 LocalDateTime.of(2015, Month.APRIL, 25, 12, 0),
                 LocalDateTime.of(2015, Month.APRIL, 25, 17, 0));
         event.addArrest(
-                "fake-arrest-id",
                 "1600 E 25TH ST",
                 "Darley Park",
                 LocalDateTime.of(2016, Month.DECEMBER, 31, 23,51),

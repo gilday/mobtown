@@ -3,6 +3,8 @@ dependencies {
     // jackson
     compile  "com.fasterxml.jackson.core:jackson-core:$versions.jackson"
     compile  "com.fasterxml.jackson.core:jackson-databind:$versions.jackson"
+    compile  "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$versions.jackson"
+    compile  "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$versions.jackson"
     // jersey
     compile  "org.glassfish.jersey.core:jersey-server:$versions.jersey"
     compile ("org.glassfish.jersey.containers:jersey-container-jetty-http:$versions.jersey")

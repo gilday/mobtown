@@ -8,8 +8,10 @@ import org.glassfish.jersey.server.ResourceConfig;
  */
 public class MobtownResourceConfig extends ResourceConfig {
 
-    public MobtownResourceConfig(final Binder module) {
-        register(module);
+    public MobtownResourceConfig(final Binder... modules) {
+        for (Binder module : modules) {
+            register(module);
+        }
         register(SpecialEventsController.class);
         register(EventNotFoundExceptionMapper.class);
         register(ObjectMapperProvider.class);

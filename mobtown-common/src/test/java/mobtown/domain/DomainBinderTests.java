@@ -6,12 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
-import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests for {@link DomainBinder}
+ * Tests for {@link JPADomainBinder}
  */
 public class DomainBinderTests {
 
@@ -19,8 +18,7 @@ public class DomainBinderTests {
 
     @Before
     public void before() {
-        final EntityManagerFactoryHK2Factory factory = new EntityManagerFactoryHK2Factory("mobtown-test-pu", new Properties());
-        locator = ServiceLocatorUtilities.bind(new DomainBinder(factory));
+        locator = ServiceLocatorUtilities.bind(JPADomainBinder.createForTest());
     }
 
     @Test

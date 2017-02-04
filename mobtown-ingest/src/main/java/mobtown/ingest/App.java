@@ -2,10 +2,12 @@ package mobtown.ingest;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
-import mobtown.domain.DomainBinder;
+import mobtown.domain.JPADomainBinder;
 import mobtown.domain.EntityManagerFactoryHK2Factory;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.Arrays;
@@ -15,6 +17,8 @@ import java.util.Properties;
  * Runs the ingest process
  */
 public class App {
+
+    private static final Logger log = LoggerFactory.getLogger(App.class);
 
     public static void main(final String[] argv) {
         final App app = new App();
@@ -53,21 +57,23 @@ public class App {
             properties.put("javax.persistence.jdbc.user", user);
         if (password != null)
             properties.put("javax.persistence.jdbc.password", password);
-        if (drop)
-            Arrays.asList(
-                    "javax.persistence.schema-generation.database.action",
-                    "javax.persistence.schema-generation.scripts.action"
-            ).forEach(p -> properties.put(p, "drop-and-create"));
+        final String action = drop ? "drop-and-create" : "create";
+        Arrays.asList(
+                "javax.persistence.schema-generation.database.action",
+                "javax.persistence.schema-generation.scripts.action"
+        ).forEach(p -> properties.put(p, action));
 
         final EntityManagerFactoryHK2Factory factory = new EntityManagerFactoryHK2Factory(properties);
-        final ServiceLocator locator = ServiceLocatorUtilities.bind(new DomainBinder(factory), new IngestBinder(max));
+        final ServiceLocator locator = ServiceLocatorUtilities.bind(JPADomainBinder.create(factory), new IngestBinder(max));
 
         // Perform ingest
         final OpenBaltimoreIngest ingest = locator.getService(OpenBaltimoreIngest.class);
+        log.info("beginning ingest of at most {} special events to database {}", max, connection);
         ingest.execute();
 
         // close EntityManagerFactory singleton
         final EntityManagerFactory emf = locator.getService(EntityManagerFactory.class);
         emf.close();
+        log.info("finished");
     }
 }

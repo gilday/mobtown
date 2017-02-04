@@ -1,6 +1,6 @@
 package mobtown.ingest;
 
-import mobtown.domain.InMemoryDomainBinder;
+import mobtown.domain.JPADomainBinder;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.Before;
@@ -14,7 +14,7 @@ public class IngestBinderTests {
 
     @Before
     public void before() {
-        locator = ServiceLocatorUtilities.bind(new InMemoryDomainBinder(), new IngestBinder(0));
+        locator = ServiceLocatorUtilities.bind(JPADomainBinder.createForTest(), new IngestBinder(0));
     }
 
     @Test

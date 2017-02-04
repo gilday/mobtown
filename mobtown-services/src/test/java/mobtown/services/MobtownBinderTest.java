@@ -1,8 +1,6 @@
 package mobtown.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mobtown.domain.InMemoryDomainBinder;
-import mobtown.services.MobtownBinder;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.Before;
@@ -19,7 +17,7 @@ public class MobtownBinderTest {
 
     @Before
     public void before() {
-        locator = ServiceLocatorUtilities.bind(new InMemoryDomainBinder(), new MobtownBinder());
+        locator = ServiceLocatorUtilities.bind(MobtownBinder.createForTest());
     }
 
     @Test

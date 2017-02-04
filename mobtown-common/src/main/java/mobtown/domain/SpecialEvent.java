@@ -78,6 +78,11 @@ public class SpecialEvent {
         arrests.remove(arrest);
     }
 
+    public int getArrestsCount() {
+        // TODO replace naive implementation
+        return arrests.size();
+    }
+
     public String getName() {
         return name;
     }
