@@ -43,7 +43,7 @@ public class SpecialEventRepositoryTests {
                 persisted.getEnd().equals(event.getEnd()) &&
                 persisted.getType().equals(event.getType()) &&
                 persisted.getArrests().size() == event.getArrests().size() &&
-                persisted.getArrests().get(0).equals(event.getArrests().get(0)));
+                persisted.getArrests().iterator().next().equals(event.getArrests().iterator().next()));
         em.getTransaction().commit();
     }
 }

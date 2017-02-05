@@ -1,7 +1,7 @@
 {
   "name": "mobtown",
   "version": "0.0.0",
-  "description": "mobtown web application visualizes Baltimore citations during and near special events using data from Open Baltimore",
+  "description": "mobtown web application visualizes Baltimore arrests during and near special events using data from Open Baltimore",
   "main": "index.js",
   "scripts": {
     "build": "mkdir -p build && webpack",

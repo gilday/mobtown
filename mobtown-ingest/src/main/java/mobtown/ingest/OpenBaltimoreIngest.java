@@ -39,6 +39,7 @@ public class OpenBaltimoreIngest {
         events.flatMap(pair -> {
             final SpecialEventPermit obEvent = pair.left;
             final Observable<Arrest> arrests = pair.right;
+            // TODO maybe introduce a smarter event categorizing algorithm to account for all the unknowns
             final String type = obEvent.type == null ? "Unknown" : obEvent.type;
 
             final SpecialEvent event = new SpecialEvent(obEvent.id, obEvent.name, type, obEvent.start, obEvent.end);

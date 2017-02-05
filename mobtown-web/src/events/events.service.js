@@ -12,7 +12,8 @@ function eventsServiceFactory ($http) {
     },
 
     get (permitID) {
-      throw new Error('not yet implemented')
+      return $http.get(`${eventsUrl}/${permitID}`, { cache: true })
+        .then(response => response.data)
     }
   }
 }

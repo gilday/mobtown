@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class FakeSpecialEventRepository implements SpecialEventRepository {
 
@@ -17,5 +18,10 @@ public class FakeSpecialEventRepository implements SpecialEventRepository {
     @Override
     public Observable<SpecialEvent> all() {
         return Observable.fromIterable(events);
+    }
+
+    @Override
+    public Optional<SpecialEvent> get(final String permitID) {
+        return events.stream().filter(e -> e.getId().equals(permitID)).findFirst();
     }
 }

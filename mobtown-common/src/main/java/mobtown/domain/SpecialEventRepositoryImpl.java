@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
+import java.util.Optional;
 
 /**
  * implementation of {@link SpecialEventRepository} backed by JPA
@@ -39,7 +40,12 @@ public class SpecialEventRepositoryImpl implements SpecialEventRepository {
 
     @Override
     public Observable<SpecialEvent> all() {
-        // TODO performance
+        // TODO replace naive implementation with a streaming rx implementation
         return Observable.fromIterable(allQuery.getResultList());
+    }
+
+    @Override
+    public Optional<SpecialEvent> get(final String permitID) {
+        return Optional.ofNullable(em.find(SpecialEvent.class, permitID));
     }
 }

@@ -4,8 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Table(name = "SPECIAL_EVENT")
@@ -22,7 +22,7 @@ public class SpecialEvent {
             joinColumns = { @JoinColumn(name = "SE_ID") },
             foreignKey = @ForeignKey(name = "FK_ARREST_SPECIAL_EVENT"))
     @OrderBy("TIMESTAMP DESC")
-    private List<Arrest> arrests = new ArrayList<>();
+    private Collection<Arrest> arrests = new ArrayList<>();
 
     @NotNull
     @NotEmptyString
@@ -64,8 +64,8 @@ public class SpecialEvent {
         return id;
     }
 
-    public List<Arrest> getArrests() {
-        return Collections.unmodifiableList(arrests);
+    public Collection<Arrest> getArrests() {
+        return Collections.unmodifiableCollection(arrests);
     }
 
     public void addArrest(final String intersection,

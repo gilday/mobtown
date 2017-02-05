@@ -5,6 +5,7 @@ import mobtown.domain.SpecialEvent;
 import mobtown.domain.SpecialEventRepository;
 import mobtown.services.MobtownBinder;
 import mobtown.services.dto.SpecialEventDTO;
+import mobtown.services.dto.SpecialEventSummaryDTO;
 import org.glassfish.hk2.utilities.Binder;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.junit.Test;
@@ -42,10 +43,10 @@ public class SpecialSpecialEventsControllerTest extends MobtownJerseyTest {
         // GIVEN the repository contains no events
 
         // WHEN list events
-        final List<SpecialEventDTO> events = target("/api/events")
+        final List<SpecialEventSummaryDTO> events = target("/api/events")
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .buildGet()
-                .invoke(new GenericType<List<SpecialEventDTO>>() { });
+                .invoke(new GenericType<List<SpecialEventSummaryDTO>>() { });
 
         // THEN returns empty list
         assertThat(events).isEmpty();
@@ -54,6 +55,36 @@ public class SpecialSpecialEventsControllerTest extends MobtownJerseyTest {
     @Test
     public void it_returns_list_of_special_events() {
         // GIVEN the repository contain an event
+        final SpecialEvent event = createSpecialEvent();
+        repository.add(event);
+
+        // WHEN list events
+        final List<SpecialEventSummaryDTO> events = target("/api/events")
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .buildGet()
+                .invoke(new GenericType<List<SpecialEventSummaryDTO>>() {});
+
+        // THEN returns events
+        assertThat(events).isNotEmpty();
+    }
+
+    @Test
+    public void it_returns_a_special_event_with_list_of_arrests_for_a_given_id() {
+        // GIVEN the repository contains an event with two arrests
+        final SpecialEvent event = createSpecialEvent();
+        repository.add(event);
+
+        // WHEN list arrests for the event
+        final SpecialEventDTO dto = target("/api/events/fake-permit-id")
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .buildGet()
+                .invoke(SpecialEventDTO.class);
+
+        // THEN contains two arrests
+        assertThat(dto.arrests).hasSize(2);
+    }
+
+    private SpecialEvent createSpecialEvent() {
         final SpecialEvent event = new SpecialEvent(
                 "fake-permit-id",
                 "Sole of the City",
@@ -65,15 +96,11 @@ public class SpecialSpecialEventsControllerTest extends MobtownJerseyTest {
                 "Darley Park",
                 LocalDateTime.of(2016, 12, 31, 23, 51),
                 "(39.3042766852, -76.6356789283)");
-        repository.add(event);
-
-        // WHEN list events
-        final List<SpecialEventDTO> events = target("/api/events")
-                .request(MediaType.APPLICATION_JSON_TYPE)
-                .buildGet()
-                .invoke(new GenericType<List<SpecialEventDTO>>() {});
-
-        // THEN returns events
-        assertThat(events).isNotEmpty();
+        event.addArrest(
+                "600 LAURENS ST",
+                "Upton",
+                LocalDateTime.of(2016, 12, 31, 23, 51),
+                "(39.3166584878, -76.5953503430)");
+        return event;
     }
 }

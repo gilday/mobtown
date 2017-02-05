@@ -1,6 +1,5 @@
-<div map-lazy-load="https://maps.google.com/maps/api/js">
-    <ng-map center="{{ $ctrl.event.position }}" zoom="{{ $ctrl.zoom }}">
-        <marker position="{{ $ctrl.event.position }}" title="{{ $ctrl.event.name }}"></marker>
-        <marker ng-repeat="citation in $ctrl.event.citations" position="{{ citation.position }}"></marker>
+<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{ $ctrl.googleMapsUrl }}">
+    <ng-map center="{{ $ctrl.center }}" zoom="{{ $ctrl.zoom }}">
+        <marker ng-repeat="arrest in $ctrl.event.arrests" position="{{ arrest.location }}"></marker>
     </ng-map>
 </div>

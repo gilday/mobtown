@@ -1,10 +1,10 @@
 <h1 class="title">Rowdiest Events 🚨</h1>
-<h2 class="subtitle">These events coincide with the highest number of citations</h2>
+<h2 class="subtitle">These events coincide with the highest number of arrests</h2>
 <div class="columns is-multiline">
-    <div class="column is-3" data-ng-repeat="event in $ctrl.events | orderBy: '-citationsCount' | limitTo : 8">
+    <div class="column is-3" data-ng-repeat="event in $ctrl.events | orderBy: '-arrestsCount' | limitTo : 8">
         <div class="card">
-            <div class="has-text-centered rowdy-event-citations">
-                <p>{{ event.citationsCount }}</p>
+            <div class="has-text-centered rowdy-event-arrests">
+                <p>{{ event.arrestsCount }}</p>
             </div>
             <div class="card-content has-text-centered rowdy-event-name">{{ event.name }}</div>
         </div>

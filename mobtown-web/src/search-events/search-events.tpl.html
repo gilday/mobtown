@@ -19,7 +19,7 @@
                 <th><a data-ng-click="$ctrl.sort('start')">Start</a></th>
                 <th><a data-ng-click="$ctrl.sort('end')">End</a></th>
                 <th><a data-ng-click="$ctrl.sort('address')">Address</a></th>
-                <th><a data-ng-click="$ctrl.sort('citationsCount')">Citations Count</a></th>
+                <th><a data-ng-click="$ctrl.sort('arrestsCount')">arrests Count</a></th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
                 <td>{{ event.start | date : 'longDate' }}</td>
                 <td>{{ event.end | date : 'longDate' }}</td>
                 <td>{{ event.address }}</td>
-                <td>{{ event.citationsCount }}</td>
+                <td>{{ event.arrestsCount }}</td>
             </tr>
         </tbody>
     </table>

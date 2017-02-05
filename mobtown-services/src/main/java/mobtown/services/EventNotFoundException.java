@@ -7,13 +7,13 @@ import mobtown.services.jaxrs.EventNotFoundExceptionMapper;
  */
 public class EventNotFoundException extends RuntimeException {
 
-    private final int id;
+    private final String id;
 
-    public EventNotFoundException(final int id) {
+    public EventNotFoundException(final String id) {
         this.id = id;
     }
     
-    public int getId() {
+    public String getId() {
         return id;
     }
 }

@@ -3,7 +3,7 @@ let permitID = 0
 /**
  * factory for succinctly creating a fake data point
  */
-function event (name, type, start, end, citationsCount) {
+function event (name, type, start, end, arrestsCount) {
   permitID++
   return {
     permitID,
@@ -11,7 +11,7 @@ function event (name, type, start, end, citationsCount) {
     type,
     start: new Date(start),
     end: new Date(end),
-    citationsCount
+    arrestsCount
   }
 }
 
@@ -37,14 +37,12 @@ module.exports = function fakeEventsServiceFactory ($q) {
     get (permitID) {
       const pub = {
         name: 'Pub Dog',
-        position: [39.277008, -76.613461],
-        citations: [{
+        arrests: [{
           position: [39.277008, -76.613461]
         }]
       }
       const union = {
-        name: 'Union',
-        position: [39.332031, -76.643215]
+        name: 'Union'
       }
       console.log('id ', permitID)
       const event = permitID === 1 ? union : pub

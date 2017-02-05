@@ -3,7 +3,8 @@ const template = require('./map.tpl.html')
 
 class MapController {
   constructor () {
-    this.gmapsAPIKey = config.gmapsAPIKey
+    this.googleMapsUrl = `https://maps.googleapis.com/maps/api/js?key=${config.gmapsAPIKey}`
+    this.center = [39.287289, -76.612474] // inner harbor
     this.zoom = 12
   }
 
