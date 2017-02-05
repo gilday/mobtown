@@ -1,32 +1,37 @@
 <h1 class="title">Explore Baltimore's Events 🗺️</h1>
 <h2 class="subtitle">Explore the events database and view individual events on the map</h2>
-<ui-view></ui-view>
-<div>
-    <p class="control has-icon">
-        <input class="input" type="text" placeholder="Search"
-            data-ng-model="$ctrl.keyword"
-            data-ng-model-options="{debounce: 200}"
-            data-ng-change="$ctrl.onKeywordChanged()">
-      <span class="icon is-small">
-        <i class="fa fa-search"></i>
-      </span>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th><a data-ng-click="$ctrl.sort('name')">Name</a></th>
-                <th><a data-ng-click="$ctrl.sort('start')">Start</a></th>
-                <th><a data-ng-click="$ctrl.sort('duration')">Duration</a></th>
-                <th><a data-ng-click="$ctrl.sort('arrestsCount')">Arrests Count</a></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr data-ng-repeat="event in $ctrl.results | orderBy : $ctrl.sortBy : $ctrl.reverse | limitTo : 8">
-                <td><a ui-sref="home.event({ permitID: event.permitID })">{{ event.name }}</a></td>
-                <td>{{ event.start | date : 'longDate' }}</td>
-                <td>{{ event.duration }} days</td>
-                <td>{{ event.arrestsCount }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="columns is-desktop is-reverse">
+    <ui-view class="column is-half">
+        <!-- display empty map by default -->
+        <mt-map></mt-map>
+    </ui-view>
+    <div class="column is-half">
+        <p class="control has-icon">
+            <input class="input" type="text" placeholder="Search"
+                data-ng-model="$ctrl.keyword"
+                data-ng-model-options="{debounce: 200}"
+                data-ng-change="$ctrl.onKeywordChanged()">
+          <span class="icon is-small">
+            <i class="fa fa-search"></i>
+          </span>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><a data-ng-click="$ctrl.sort('name')">Name</a></th>
+                    <th><a data-ng-click="$ctrl.sort('start')">Start</a></th>
+                    <th><a data-ng-click="$ctrl.sort('duration')">Duration</a></th>
+                    <th><a data-ng-click="$ctrl.sort('arrestsCount')">Arrests Count</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="event in $ctrl.results | orderBy : $ctrl.sortBy : $ctrl.reverse | limitTo : 8">
+                    <td><a ui-sref="home.event({ permitID: event.permitID })">{{ event.name }}</a></td>
+                    <td>{{ event.start | date : 'mediumDate' }}</td>
+                    <td>{{ event.duration }} days</td>
+                    <td>{{ event.arrestsCount }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

@@ -1,6 +1,9 @@
+.is-reverse {
+    flex-direction: row-reverse;
+}
 .map {
     margin-bottom: 1.5rem;
 }
 .mobtown-gmap {
-    height: 400px;
+    height: 500px;
 }
