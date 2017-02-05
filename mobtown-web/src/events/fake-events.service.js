@@ -38,7 +38,7 @@ module.exports = function fakeEventsServiceFactory ($q) {
       const pub = {
         name: 'Pub Dog',
         arrests: [{
-          position: [39.277008, -76.613461]
+          location: [39.277008, -76.613461]
         }]
       }
       const union = {
