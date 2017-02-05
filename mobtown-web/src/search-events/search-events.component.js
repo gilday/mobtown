@@ -2,9 +2,16 @@ const template = require('./search-events.tpl.html')
 
 class SearchEventsController {
   $onInit () {
-    // start by displaying all the events sorted by permit ID
+    this.events = this.events.map(e => ({
+      permitID: e.permitID,
+      name: e.name,
+      start: e.start,
+      duration: Math.ceil((e.end - e.start) / (1000 * 60 * 60 * 24)), // TODO employ moment.js durations
+      arrestsCount: e.arrestsCount
+    }))
+    // start by displaying all the events sorted by name
     this.results = this.events
-    this.sortBy = 'permitID'
+    this.sortBy = 'name'
     this.reverse = false
   }
 

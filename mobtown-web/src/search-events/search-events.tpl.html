@@ -14,21 +14,17 @@
     <table class="table">
         <thead>
             <tr>
-                <th><a data-ng-click="$ctrl.sort('permitID')">Permit ID</a></th>
                 <th><a data-ng-click="$ctrl.sort('name')">Name</a></th>
                 <th><a data-ng-click="$ctrl.sort('start')">Start</a></th>
-                <th><a data-ng-click="$ctrl.sort('end')">End</a></th>
-                <th><a data-ng-click="$ctrl.sort('address')">Address</a></th>
-                <th><a data-ng-click="$ctrl.sort('arrestsCount')">arrests Count</a></th>
+                <th><a data-ng-click="$ctrl.sort('duration')">Duration</a></th>
+                <th><a data-ng-click="$ctrl.sort('arrestsCount')">Arrests Count</a></th>
             </tr>
         </thead>
         <tbody>
             <tr data-ng-repeat="event in $ctrl.results | orderBy : $ctrl.sortBy : $ctrl.reverse | limitTo : 8">
-                <td>{{ event.permitID }}</td>
                 <td><a ui-sref="home.event({ permitID: event.permitID })">{{ event.name }}</a></td>
                 <td>{{ event.start | date : 'longDate' }}</td>
-                <td>{{ event.end | date : 'longDate' }}</td>
-                <td>{{ event.address }}</td>
+                <td>{{ event.duration }} days</td>
                 <td>{{ event.arrestsCount }}</td>
             </tr>
         </tbody>
