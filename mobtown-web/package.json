@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "mkdir -p build && webpack",
-    "start": "webpack-dev-server -d --colors --port 8000",
+    "start": "webpack-dev-server -d --colors --port 9000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Johnathan Gilday",

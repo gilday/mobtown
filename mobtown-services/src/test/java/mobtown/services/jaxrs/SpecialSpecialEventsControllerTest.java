@@ -42,7 +42,7 @@ public class SpecialSpecialEventsControllerTest extends MobtownJerseyTest {
         // GIVEN the repository contains no events
 
         // WHEN list events
-        final List<SpecialEventDTO> events = target("/events")
+        final List<SpecialEventDTO> events = target("/api/events")
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .buildGet()
                 .invoke(new GenericType<List<SpecialEventDTO>>() { });
@@ -68,7 +68,7 @@ public class SpecialSpecialEventsControllerTest extends MobtownJerseyTest {
         repository.add(event);
 
         // WHEN list events
-        final List<SpecialEventDTO> events = target("/events")
+        final List<SpecialEventDTO> events = target("/api/events")
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .buildGet()
                 .invoke(new GenericType<List<SpecialEventDTO>>() {});

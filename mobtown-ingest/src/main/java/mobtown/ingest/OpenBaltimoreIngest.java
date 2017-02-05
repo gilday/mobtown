@@ -39,11 +39,12 @@ public class OpenBaltimoreIngest {
         events.flatMap(pair -> {
             final SpecialEventPermit obEvent = pair.left;
             final Observable<Arrest> arrests = pair.right;
+            final String type = obEvent.type == null ? "Unknown" : obEvent.type;
 
-            final SpecialEvent event = new SpecialEvent(obEvent.id, obEvent.name, obEvent.type, obEvent.start, obEvent.end);
+            final SpecialEvent event = new SpecialEvent(obEvent.id, obEvent.name, type, obEvent.start, obEvent.end);
             return arrests
                     .filter(arrest -> arrest.location != null)
-                    .take(64)
+                    .take(128)
                     .reduce(event, (specialEvent, arrest) -> {
                         event.addArrest(
                                 arrest.intersection,

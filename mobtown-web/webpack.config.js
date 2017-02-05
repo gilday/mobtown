@@ -3,6 +3,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
+  devServer: {
+    proxy: {
+      '/api/**': {
+        // proxy to local mobtown service
+        target: 'http://localhost:8000'
+      }
+    }
+  },
   entry: path.join(__dirname, 'src', 'index.js'),
   module: {
     loaders: [{

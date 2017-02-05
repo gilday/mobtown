@@ -1,5 +1,5 @@
 const angular = require('angular')
-const fakeEventsService = require('./fake-events.service')
+const events = require('./events.service')
 
 const charts = angular
   .module('mobtown.events', [])

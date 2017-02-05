@@ -29,6 +29,8 @@ public class SpecialEvent {
     @Column(name = "NAME", nullable = false)
     private String name;
 
+    @NotNull
+    @NotEmptyString
     @Column(name = "TYPE")
     private String type;
 

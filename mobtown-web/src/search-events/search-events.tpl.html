@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="event in $ctrl.results | orderBy : $ctrl.sortBy : $ctrl.reverse">
+            <tr data-ng-repeat="event in $ctrl.results | orderBy : $ctrl.sortBy : $ctrl.reverse | limitTo : 8">
                 <td>{{ event.permitID }}</td>
                 <td><a ui-sref="home.event({ permitID: event.permitID })">{{ event.name }}</a></td>
                 <td>{{ event.start | date : 'longDate' }}</td>
