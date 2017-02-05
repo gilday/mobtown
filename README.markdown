@@ -21,18 +21,18 @@ with the following technologies:
 ## Getting Started
 
 1. install Java 8
-2. install node.js and npm (tested with v7.3.0 and v3.10.10 respectively)
-3. run a MySQL container using docker `docker run --name mysql -e MYSQL_ROOT_PASSWORD-password -d mysql`
-3. use the [Google API
-   Console](https://console.developers.google.com/apis/dashboard) to generate a
-   Google Maps JavaScript API key and set environment variable
+2. run a MySQL container using docker `docker run --name mysql -e MYSQL_ROOT_PASSWORD-password -d mysql`
+3. use the [Google API Console](https://console.developers.google.com/apis/dashboard)
+   to generate a Google Maps JavaScript API key and set environment variable
    `MOBTOWN_GMAPS_API_KEY` to its value
-4. execute `./gradlew build shadowJar` to build the Java backend
-5. execute `java -jar mobtown-ingest/build/libs/mobtown-ingest-0.0.1-SNAPSHOT-all.jar` to ingest Open Baltimore data into the MySQL database
-4. execute `./gradlew run` to run the backend Java REST API locally
-5. in directory `mobtown-web`, execute `npm install && npm start` to run the
-   front-end development web server locally
-6. Browse to http://localhost:9000/
+4. execute `./gradlew build`
+5. execute `./gradlew mobtown-ingest:run` to ingest Open Baltimore data into the
+   MySQL database. The process will exit when it finishes the ingest
+4. execute `./gradlew mobtown-services:run` to run the backend Java REST API locally.
+   The service will continue to run until you send a SIGTERM
+5. execute `./gradlew mobtown-web:run` to run the front-end development web
+   server locally
+6. Browse to the front-end web development server at http://localhost:9000/
 
 
 ## Why is it called "mobtown"?

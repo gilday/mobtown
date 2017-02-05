@@ -32,9 +32,13 @@ ext {
 
 configure(subprojects.findAll {it.name != 'mobtown-web'}) {
     apply plugin: 'java'
-    apply plugin: 'com.github.johnrengelman.shadow'
     sourceCompatibility = 1.8
     repositories {
          jcenter()
     }
+}
+configure(subprojects.findAll {it.name == 'mobtown-ingest' || it.name == 'mobtown-services'}) {
+    apply plugin: 'com.github.johnrengelman.shadow'
+    jar.enabled = false // do not create the typical jar
+    assemble.dependsOn('shadowJar') // create the shadow jar
 }

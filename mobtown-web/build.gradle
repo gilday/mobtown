@@ -1,0 +1,16 @@
+plugins {
+    id 'com.moowork.node' version '1.1.1'
+}
+
+node {
+    // installs a project specific version of node and npm to ensure portability for casual users of this project
+    version = '7.3.0'
+    npmVersion = '3.10.10'
+    download = true
+}
+
+// alias npm tasks as gradle tasks
+task clean(dependsOn: 'npm_run_clean')
+task build(dependsOn: 'npm_run_build')
+task run(dependsOn: 'npm_start')
+task test(dependsOn: 'npm_test')
