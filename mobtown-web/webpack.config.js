@@ -1,4 +1,5 @@
 const path = require('path')
+const ArchivePlugin = require('webpack-archive-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
@@ -29,10 +30,11 @@ module.exports = {
     }]
   },
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'build', 'web'),
     filename: 'bundle.js'
   },
   plugins: [
+    new ArchivePlugin({ format: 'tar', output: path.join(__dirname, 'build', 'dist', 'mobtown-web') }),
     new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({
       MOBTOWN_GMAPS_API_KEY: JSON.stringify(process.env.MOBTOWN_GMAPS_API_KEY)

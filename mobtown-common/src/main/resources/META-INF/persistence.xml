@@ -18,6 +18,13 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/mobtown"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="password"/>
+            <property name="connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
+            <property name="hibernate.c3p0.max_size" value="15" />
+            <property name="hibernate.c3p0.min_size" value="3" />
+            <property name="hibernate.c3p0.timeout" value="25200" />
+            <property name="hibernate.c3p0.autoCommitOnClose" value="false" />
+            <property name="hibernate.c3p0.acquireRetryDelay" value="1000" />
+            <property name="hibernate.c3p0.acquireRetryAttempts" value="60" />
         </properties>
     </persistence-unit>
     <persistence-unit name="mobtown-test-pu" transaction-type="RESOURCE_LOCAL">

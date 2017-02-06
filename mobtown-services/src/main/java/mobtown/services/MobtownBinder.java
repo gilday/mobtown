@@ -9,6 +9,7 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.process.internal.RequestScoped;
 
 import javax.inject.Singleton;
+import java.util.Properties;
 
 /**
  * HK2 module for wiring mobtown-services components
@@ -16,10 +17,11 @@ import javax.inject.Singleton;
 public class MobtownBinder extends AbstractBinder {
 
     /**
+     * @param properties {@link Properties} for creating the MySQL backed EntityManagerFactory
      * @return binder configured to use JPA backed by MySQL
      */
-    public static MobtownBinder create() {
-        final JPADomainBinder domain = JPADomainBinder.create(new EntityManagerFactoryHK2Factory(), RequestScoped.class);
+    public static MobtownBinder create(final Properties properties) {
+        final JPADomainBinder domain = JPADomainBinder.create(new EntityManagerFactoryHK2Factory(properties), RequestScoped.class);
         return new MobtownBinder(domain);
     }
 

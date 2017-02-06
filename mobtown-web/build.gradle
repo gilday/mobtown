@@ -1,6 +1,8 @@
-plugins {
-    id 'com.moowork.node' version '1.1.1'
-}
+apply plugin: 'com.moowork.node'
+apply plugin: 'com.bmuschko.docker-remote-api'
+
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
 node {
     // installs a project specific version of node and npm to ensure portability for casual users of this project
@@ -14,3 +16,24 @@ task clean(dependsOn: 'npm_run_clean')
 task build(dependsOn: 'npm_run_build')
 task run(dependsOn: 'npm_start')
 task test(dependsOn: 'npm_test')
+
+task copyDistToDocker(type: Copy) {
+    dependsOn npm_run_build
+    from 'build/dist'
+    from 'docker'
+    into 'build/docker'
+}
+
+task createDockerfile(type: Dockerfile) {
+    destFile = project.file('build/docker/Dockerfile')
+    from 'nginx'
+    maintainer 'Johnathan Gilday <me@johnathangilday.com>'
+    addFile('mobtown-web.tar.gz', '/usr/share/nginx/html')
+    copyFile('default.conf', '/etc/nginx/conf.d/default.conf')
+}
+
+task dockerBuildImage(type: DockerBuildImage) {
+    dependsOn([createDockerfile, copyDistToDocker])
+    inputDir = project.file('build/docker')
+    tag = 'mobtown/web'
+}

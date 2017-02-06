@@ -1,14 +1,21 @@
-allprojects {
-    group = 'com.johnathangilday'
-    version = '0.0.1-SNAPSHOT'
-}
-
 buildscript {
     repositories {
         jcenter()
     }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+}
+
+plugins {
+    id 'com.moowork.node' version '1.1.1' apply false
+    id 'com.bmuschko.docker-java-application' version '3.0.5' apply false
+    id 'com.bmuschko.docker-remote-api' version '3.0.5'
+}
+
+allprojects {
+    group = 'com.johnathangilday'
+    version = '0.0.1-SNAPSHOT'
+
+    repositories {
+        jcenter()
     }
 }
 
@@ -33,12 +40,8 @@ ext {
 configure(subprojects.findAll {it.name != 'mobtown-web'}) {
     apply plugin: 'java'
     sourceCompatibility = 1.8
-    repositories {
-         jcenter()
-    }
 }
-configure(subprojects.findAll {it.name == 'mobtown-ingest' || it.name == 'mobtown-services'}) {
-    apply plugin: 'com.github.johnrengelman.shadow'
-    jar.enabled = false // do not create the typical jar
-    assemble.dependsOn('shadowJar') // create the shadow jar
+configure(subprojects.findAll {it.name == 'mobtown-services' || it.name == 'mobtown-ingest' }) {
+    apply plugin: 'application'
+    apply plugin: 'com.bmuschko.docker-java-application'
 }

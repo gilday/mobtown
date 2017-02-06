@@ -1,9 +1,14 @@
+ext.java = true
+
 dependencies {
     // hibernate
     compile "org.hibernate:hibernate-core:$versions.hibernate"
+    runtime 'org.hibernate:hibernate-c3p0:5.1.4.Final'
     compile "org.hibernate:hibernate-validator:$versions.hibernateValidator"
     // hk2
     compile "org.glassfish.hk2:hk2:$versions.hk2"
+    // jcommander
+    compile "com.beust:jcommander:$versions.jcommander"
     // mysql
     runtime 'mysql:mysql-connector-java:6.0.5'
     // rxjava

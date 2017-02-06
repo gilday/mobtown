@@ -1,3 +1,5 @@
+apply plugin: 'application'
+
 dependencies {
     compile project(':mobtown-common')
     // jcommander
@@ -19,17 +21,12 @@ dependencies {
     testCompile 'org.apache.derby:derby:10.13.1.1'
 }
 
-jar {
-    manifest {
-        attributes("Main-Class": "mobtown.ingest.App")
+mainClassName = 'mobtown.ingest.App'
+
+docker {
+    javaApplication {
+        maintainer = 'Johnathan Gilday <me@johnathangilday.com>'
+        ports = []
+        tag = 'mobtown/ingest'
     }
-}
-
-shadowJar {
-    mergeServiceFiles()
-}
-
-task(run, dependsOn: 'classes', type: JavaExec) {
-    main = "mobtown.ingest.App"
-    classpath = sourceSets.main.runtimeClasspath
 }

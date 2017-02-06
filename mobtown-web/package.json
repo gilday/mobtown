@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf build",
-    "build": "mkdir -p build && webpack",
-    "start": "webpack-dev-server -d --colors --port 9000",
-    "test": "standard"
+    "build": "mkdir -p build/web build/dist && webpack -p",
+    "test": "standard",
+    "start": "webpack-dev-server -d --colors --port 9000"
   },
   "author": "Johnathan Gilday",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "standard": "^8.6.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
+    "webpack-archive-plugin": "^2.0.0",
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
