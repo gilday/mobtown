@@ -1,6 +1,6 @@
 const template = require('./month-histogram.tpl.html')
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'Juyl', 'August', 'September', 'October', 'November', 'December']
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 const abbreviations = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 class MonthHistogramController {
@@ -23,7 +23,7 @@ class MonthHistogramController {
  */
 function maxIndex (arry) {
   let index
-  let max = 0
+  let max = Number.MIN_VALUE
   for (let i = 0; i < arry.length; i++) {
     if (arry[i] > max) {
       index = i

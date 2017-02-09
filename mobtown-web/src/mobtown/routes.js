@@ -1,7 +1,7 @@
 module.exports = ['$stateProvider', function initializeStateProvider ($stateProvider) {
   $stateProvider.state({
     name: 'home',
-    component: 'home',
+    component: 'mtHome',
     url: '',
     resolve: {
       events: ['eventsService', events => events.all()]

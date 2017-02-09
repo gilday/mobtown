@@ -3,7 +3,7 @@ const ArchivePlugin = require('webpack-archive-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
-module.exports = {
+const config = {
   devServer: {
     proxy: {
       '/api/**': {
@@ -34,10 +34,15 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    new ArchivePlugin({ format: 'tar', output: path.join(__dirname, 'build', 'dist', 'mobtown-web') }),
     new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({
       MOBTOWN_GMAPS_API_KEY: JSON.stringify(process.env.MOBTOWN_GMAPS_API_KEY)
     })
   ]
 }
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(new ArchivePlugin({ format: 'tar', output: path.join(__dirname, 'build', 'dist', 'mobtown-web') }))
+}
+
+module.exports = config

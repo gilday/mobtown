@@ -20,20 +20,6 @@ class SearchEventsController {
     this.results = this.events.filter(e => re.test(e.name))
   }
 
-  onSelect (event) {
-    if (this.map) {
-      const id = event.permitID
-      console.log('display event ID ', id)
-    }
-  }
-
-  /**
-   * sets a reference to a map directive
-   */
-  setMap (map) {
-    this.map = map
-  }
-
   sort (sortBy) {
     if (this.sortBy === sortBy) {
       // change direction

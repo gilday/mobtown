@@ -1,8 +1,8 @@
 const angular = require('angular')
-const events = require('./events.service')
+const service = require('./events.service')
 
-const charts = angular
+const events = angular
   .module('mobtown.events', [])
-  .factory('eventsService', events)
+  .factory('eventsService', service)
 
-module.exports = charts.name
+module.exports = events.name

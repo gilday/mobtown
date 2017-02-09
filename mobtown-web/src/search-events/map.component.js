@@ -7,10 +7,6 @@ class MapController {
     this.center = [39.287289, -76.612474] // inner harbor
     this.zoom = 12
   }
-
-  $onInit () {
-    console.log('initialized with param ', this.event)
-  }
 }
 
 module.exports = {

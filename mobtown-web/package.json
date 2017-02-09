@@ -2,6 +2,7 @@
   "name": "mobtown",
   "version": "0.0.0",
   "description": "mobtown web application visualizes Baltimore arrests during and near special events using data from Open Baltimore",
+  "repository": "https://github.com/gilday/mobtown",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf build",
@@ -28,6 +29,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "angular": "^1.6.2",
     "angular-chartist.js": "^4.3.0",
     "angular-ui-router": "^1.0.0-rc.1",
     "bulma": "^0.3.0",
