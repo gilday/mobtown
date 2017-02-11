@@ -21,14 +21,36 @@ with the following technologies:
   events
 
 
+## Getting Start (with Vagrant)
+
+The Vagrantfile defines an Ubuntu Xenial Xerus (16.04) vagrant box running on
+VirtualBox for hacking on mobtown. The ubuntu box installs Java 8,
+docker-engine, and docker-compose so you can hack on and build mobtown without
+mucking with your development environment. Vagrant will [use rsync to
+share](https://www.vagrantup.com/docs/synced-folders/rsync.html) the
+mobtown project directory with the VirtualBox VM in `/vagrant`. The mobtown
+Vagrantfile uses rsync instead of the default VirtualBox shared directory due to
+problems with using npm in a VirtualBox share; since Vagrant uses an rsync
+share, any edits made in the Vagrant machine will not be automatically synced to
+the host.  Vagrant will forward your host's port 9000 to the VirtualBox VM so
+you can still test the app at http://localhost:9000
+
+1. Install Vagrant, VirtualBox, and rsync
+2. `vagrant up` to instantiate the box
+3. `vagrant ssh` to connect to the box
+3. Once connected to the vagrant box, `cd /vagrant` to access the project files
+4. Follow "Getting Started (with docker)" starting with step (2)
+
+
 ## Getting Started (with docker)
 
 Running mobtown with docker is the easiest way to get started because
 it minimizes the number of dependencies you need to install and docker-compose
 integrates all the mobtown services to work together for you.
 
-1. install Java 8, docker, and docker-compose. The build assumes that your user
-   has access to the default docker socket running on localhost
+1. install Java 8, docker, and docker-compose. Make sure the docker service is
+   running. The build assumes that your user has access to the default docker
+   socket running on localhost
 2. use the [Google API Console](https://console.developers.google.com/apis/dashboard)
    to generate a Google Maps JavaScript API key and set environment variable
    `MOBTOWN_GMAPS_API_KEY` to its value
@@ -42,7 +64,7 @@ integrates all the mobtown services to work together for you.
    ingest`
 
 
-## Getting Started (no docker)
+## Getting Started (without docker)
 
 No docker? You can still run mobtown by running a few services and configuring
 them to communicate with each other.
@@ -72,4 +94,3 @@ them to communicate with each other.
 This example web app explores Baltimore's [Special Events Permits](https://data.baltimorecity.gov/Public-Works/Special-Event-Permits/cdz5-3y2u/data)
 public data set. One might playfully refer to a rowdy festival in Baltimore as a
 "mob"
-
