@@ -17,6 +17,11 @@ task build(dependsOn: 'npm_run_build')
 task run(dependsOn: 'npm_start')
 task test(dependsOn: 'npm_test')
 
+// include build in 'assemble'
+task assemble(dependsOn: 'build')
+// check should run tests
+task check(dependsOn: 'test')
+
 task copyDistToDocker(type: Copy) {
     dependsOn npm_run_build
     from 'build/dist'
