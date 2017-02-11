@@ -58,7 +58,7 @@ integrates all the mobtown services to work together for you.
    including docker images
 4. `docker-compose up -d` to run all the mobtown docker images and their
    dependencies
-5. browse to http://localhost:8000. Note: it may take some time for the ingest
+5. browse to http://localhost:9000. Note: it may take some time for the ingest
    process to finish and the web server to start up. you can check the logs for
    those services using `docker-compose logs services` and `docker-compose logs
    ingest`
@@ -84,8 +84,12 @@ them to communicate with each other.
    --help` to see database connection parameters (same as `mobtown-ingest`).
    This app runs the mobtown HTTP API
 7. execute `./gradlew mobtown-web:run` to start a development web server to serve the
-   front-end. The development web server includes a reverse proxy for proxying
-8. browse to http://localhost:8000/
+   front-end. The development web server includes a reverse proxy for proxying.
+   Because the development web server process runs as part of the gradle build
+   when using the "run" target, the gradle build will appear to hang, but when
+   it prints "webpack: Compiled successfully", then the webpack dev server has
+   finished building and is accepting requests
+8. browse to http://localhost:9000/
 
 
 ## Why is it called "mobtown"?
