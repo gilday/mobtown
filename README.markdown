@@ -1,5 +1,7 @@
 # mobtown
 
+[![Build Status](https://travis-ci.org/gilday/mobtown.svg?branch=master)](https://travis-ci.org/gilday/mobtown)
+
 Example full-stack web app built to demonstrate a curated set of technologies.
 Mobtown explores Baltimore's public data sets for [Special Event
 Permits](https://data.baltimorecity.gov/Public-Works/Special-Event-Permits/cdz5-3y2u/data)
