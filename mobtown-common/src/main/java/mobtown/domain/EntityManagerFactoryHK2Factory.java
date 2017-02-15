@@ -12,18 +12,15 @@ public class EntityManagerFactoryHK2Factory implements Factory<EntityManagerFact
     private final Properties properties;
 
     /**
-     * create a new {@link EntityManagerFactory} configured to use the default, test MySQL database
-     */
-    public EntityManagerFactoryHK2Factory() {
-        this(new Properties());
-    }
-
-    /**
      * create a new {@link EntityManagerFactory} configured to use the MySQL persistence unit with the given property overrides
      * @param properties property overrides
      */
     public EntityManagerFactoryHK2Factory(final Properties properties) {
         this("mobtown-mysql-pu", properties);
+    }
+
+    public EntityManagerFactoryHK2Factory(final String persistenceUnit) {
+        this(persistenceUnit, null);
     }
 
     EntityManagerFactoryHK2Factory(final String persistenceUnit, final Properties properties) {

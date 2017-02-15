@@ -6,15 +6,20 @@
         <mt-map></mt-map>
     </ui-view>
     <div class="column is-half">
-        <p class="control has-icon">
-            <input class="input" type="text" placeholder="Search"
-                data-ng-model="$ctrl.keyword"
-                data-ng-model-options="{debounce: 200}"
-                data-ng-change="$ctrl.onKeywordChanged()">
-          <span class="icon is-small">
-            <i class="fa fa-search"></i>
-          </span>
-        </p>
+        <div class="control has-icon is-grouped">
+            <p class="control is-expanded">
+                <input class="input" type="text" placeholder="Search"
+                    data-ng-model="$ctrl.keyword"
+                    data-ng-model-options="{debounce: 200}"
+                    data-ng-change="$ctrl.onKeywordChanged()">
+                <span class="icon is-small">
+                    <i class="fa fa-search"></i>
+                </span>
+            </p>
+            <p class="control">
+                <a class="button" ui-sref="new">Add Event</a>
+            </p>
+        </div>
         <table class="table">
             <thead>
                 <tr>

@@ -18,7 +18,7 @@ public class DomainBinderTests {
 
     @Before
     public void before() {
-        locator = ServiceLocatorUtilities.bind(JPADomainBinder.createForTest());
+        locator = ServiceLocatorUtilities.bind(JPADomainBinder.createForTest(), new NormalScopedEntityManagerBinder());
     }
 
     @Test

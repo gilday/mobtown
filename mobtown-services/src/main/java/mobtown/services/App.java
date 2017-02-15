@@ -37,7 +37,7 @@ public class App extends AbstractApp {
 
         // start jetty
         final Properties properties = createEntityManagerFactoryProperties();
-        final MobtownResourceConfig app = new MobtownResourceConfig(MobtownBinder.create(properties));
+        final MobtownResourceConfig app = MobtownResourceConfig.create(properties);
         logger.info("listening on port {}", port);
         final Server server = JettyHttpContainerFactory.createServer(baseUri, ResourceConfig.forApplication(app));
         try {

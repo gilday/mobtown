@@ -1,5 +1,6 @@
 package mobtown.ingest;
 
+import mobtown.domain.NormalScopedEntityManagerBinder;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 /**
@@ -18,6 +19,7 @@ public class IngestBinder extends AbstractBinder {
 
     @Override
     protected void configure() {
+        install(new NormalScopedEntityManagerBinder());
         bind(max).to(Integer.class).named("ingest.max");
         bind(SpecialEventDatabaseImpl.class).to(SpecialEventDatabase.class);
         bindAsContract(OpenBaltimoreIngest.class);

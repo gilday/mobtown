@@ -9,15 +9,15 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests that {@link MobtownBinder} is properly configured
+ * Tests that {@link ObjectMapperBinder} is properly configured
  */
-public class MobtownBinderTest {
+public class ObjectMapperBinderTest {
 
     private ServiceLocator locator;
 
     @Before
     public void before() {
-        locator = ServiceLocatorUtilities.bind(MobtownBinder.createForTest());
+        locator = ServiceLocatorUtilities.bind(ObjectMapperBinder.get());
     }
 
     @Test

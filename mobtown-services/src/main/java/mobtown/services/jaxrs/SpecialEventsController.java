@@ -1,15 +1,13 @@
 package mobtown.services.jaxrs;
 
+import mobtown.domain.SpecialEvent;
 import mobtown.domain.SpecialEventRepository;
 import mobtown.services.EventNotFoundException;
 import mobtown.services.dto.SpecialEventDTO;
 import mobtown.services.dto.SpecialEventSummaryDTO;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.Optional;
@@ -36,11 +34,21 @@ public class SpecialEventsController {
 
     @GET
     @Path("/{permitID}")
-    public SpecialEventDTO arrests(@PathParam("permitID") final String permitID) {
+    public SpecialEventDTO get(@PathParam("permitID") final String permitID) {
         final Optional<SpecialEventDTO> event = repository.get(permitID).map(SpecialEventDTO::fromModel);
         if (event.isPresent()) {
             return event.get();
         }
         throw new EventNotFoundException(permitID);
+    }
+
+    @PUT
+    @Path("/{permitID}")
+    public void put(@PathParam("permitID") final String permitID, final SpecialEventDTO dto) {
+        if (!permitID.equals(dto.permitID)) {
+            throw new BadRequestException(permitID + " does not match the ID in the request body " + dto.permitID);
+        }
+        final SpecialEvent event = new SpecialEvent(dto.permitID, dto.name, dto.type, dto.start, dto.end);
+        repository.add(event);
     }
 }

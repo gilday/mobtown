@@ -20,11 +20,20 @@ public class EntityManagerHK2Factory implements Factory<EntityManager> {
 
     @Override
     public EntityManager provide() {
-        return emf.createEntityManager();
+        final EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        return em;
     }
 
     @Override
     public void dispose(final EntityManager em) {
-        em.close();
+        if (em.getTransaction().getRollbackOnly()) {
+            em.getTransaction().rollback();
+        } else if (em.getTransaction().isActive()){
+            em.getTransaction().commit();
+        }
+        if (em.isOpen()) {
+            em.close();
+        }
     }
 }

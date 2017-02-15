@@ -1,0 +1,48 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title">New Event</h1>
+        <p class="content">All fields are required</p>
+        <form name="event" novalidate ng-submit="$ctrl.onSave()">
+            <label for="permit-id" class="label">Permit ID</label>
+            <p class="control">
+                <input name="permit-id" class="input" type="text"
+                    placeholder="ROW2017-SE100001" required
+                    ng-class="{'is-danger': event['permit-id'].$invalid && event['permit-id'].$dirty}"
+                    ng-model="$ctrl.event.permitID">
+            </p>
+            <label for="name" class="label">Name</label>
+            <p class="control">
+                <input name="name" class="input" type="text"
+                    placeholder="My Event Name" required
+                    ng-class="{'is-danger': event.name.$invalid && event.name.$dirty}"
+                    ng-model="$ctrl.event.name">
+            </p>
+            <label for="type" class="label">Type</label>
+            <p class="control">
+                <input name="type" class="input" type="text" required
+                    ng-class="{'is-danger': event.type.$invalid && event.type.$dirty}"
+                    ng-model="$ctrl.event.type">
+            </p>
+            <label for="start" class="label">Start</label>
+            <p class="control">
+                <input name="start" class="input" type="date" required
+                    ng-class="{'is-danger': event.start.$invalid && event.start.$dirty}"
+                    ng-model="$ctrl.event.start">
+            </p>
+            <label for="end" class="label">End</label>
+            <p class="control">
+                <input name="end" class="input" type="date" required
+                    ng-class="{'is-danger': event.end.$invalid && event.end.$dirty}"
+                    ng-model="$ctrl.event.end">
+            </p>
+            <div class="control is-grouped">
+                <p class="control">
+                    <input class="button is-primary" type="submit" value="Submit" ng-disabled="event.$invalid">
+                </p>
+                <p class="control">
+                    <button class="button is-link" ui-sref="home">Cancel</button>
+                </p>
+            </div>
+        </form>
+    </div>
+</section>

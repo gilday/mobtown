@@ -1,18 +1,19 @@
 package mobtown.services.jaxrs;
 
 import mobtown.domain.FakeSpecialEventRepository;
+import mobtown.domain.InMemoryDomainBinder;
 import mobtown.domain.SpecialEvent;
 import mobtown.domain.SpecialEventRepository;
-import mobtown.services.MobtownBinder;
+import mobtown.services.FakeData;
 import mobtown.services.dto.SpecialEventDTO;
 import mobtown.services.dto.SpecialEventSummaryDTO;
-import org.glassfish.hk2.utilities.Binder;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.junit.Test;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-import java.time.LocalDateTime;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,22 +21,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link SpecialEventsController}
  */
-public class SpecialSpecialEventsControllerTest extends MobtownJerseyTest {
+public class SpecialEventsControllerTest extends MobtownJerseyTest {
 
     private SpecialEventRepository repository;
 
     @Override
-    Binder[] createModules() {
+    protected MobtownResourceConfig configureMobtownResourceConfig() {
         repository = new FakeSpecialEventRepository();
-        return new Binder[] {
-            new AbstractBinder() {
-                @Override
-                protected void configure() {
-                    bind(repository).to(SpecialEventRepository.class);
-                }
-            },
-            MobtownBinder.createForTest()
-        };
+        return new MobtownResourceConfig(new AbstractBinder() {
+            @Override
+            protected void configure() {
+                bind(repository).to(SpecialEventRepository.class);
+            }
+        }, new InMemoryDomainBinder());
     }
 
     @Test
@@ -55,7 +53,7 @@ public class SpecialSpecialEventsControllerTest extends MobtownJerseyTest {
     @Test
     public void it_returns_list_of_special_events() {
         // GIVEN the repository contain an event
-        final SpecialEvent event = createSpecialEvent();
+        final SpecialEvent event = FakeData.createSpecialEvent();
         repository.add(event);
 
         // WHEN list events
@@ -71,7 +69,7 @@ public class SpecialSpecialEventsControllerTest extends MobtownJerseyTest {
     @Test
     public void it_returns_a_special_event_with_list_of_arrests_for_a_given_id() {
         // GIVEN the repository contains an event with two arrests
-        final SpecialEvent event = createSpecialEvent();
+        final SpecialEvent event = FakeData.createSpecialEvent();
         repository.add(event);
 
         // WHEN list arrests for the event
@@ -84,23 +82,28 @@ public class SpecialSpecialEventsControllerTest extends MobtownJerseyTest {
         assertThat(dto.arrests).hasSize(2);
     }
 
-    private SpecialEvent createSpecialEvent() {
-        final SpecialEvent event = new SpecialEvent(
-                "fake-permit-id",
-                "Sole of the City",
-                "run",
-                LocalDateTime.of(2015, 4, 25, 12, 0),
-                LocalDateTime.of(2015, 4, 25, 17, 0));
-        event.addArrest(
-                "1600 E 25TH ST",
-                "Darley Park",
-                LocalDateTime.of(2016, 12, 31, 23, 51),
-                "(39.3042766852, -76.6356789283)");
-        event.addArrest(
-                "600 LAURENS ST",
-                "Upton",
-                LocalDateTime.of(2016, 12, 31, 23, 51),
-                "(39.3166584878, -76.5953503430)");
-        return event;
+    @Test
+    public void it_creates_a_new_special_event() {
+        // GIVEN an empty repository
+        assertThat(repository.all().toList().blockingGet()).isEmpty();
+
+        // WHEN request a new special event be created
+        final SpecialEventDTO event = SpecialEventDTO.fromModel(FakeData.createSpecialEvent());
+        final Response response = target("/api/events/fake-permit-id")
+                .request()
+                .buildPut(Entity.entity(event, MediaType.APPLICATION_JSON_TYPE))
+                .invoke();
+
+        // THEN responds with HTTP 204 No Content
+        assertThat(response.getStatus()).isEqualTo(204);
+        // AND repository contains one new event
+        final List<SpecialEvent> events = repository.all().toList().blockingGet();
+        assertThat(events).hasSize(1);
+        final SpecialEvent persisted = events.get(0);
+        assertThat(persisted.getId()).isEqualTo(event.permitID);
+        assertThat(persisted.getName()).isEqualTo(event.name);
+        assertThat(persisted.getType()).isEqualTo(event.type);
+        assertThat(persisted.getStart()).isEqualTo(event.start);
+        assertThat(persisted.getEnd()).isEqualTo(event.end);
     }
 }

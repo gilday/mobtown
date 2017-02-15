@@ -2,7 +2,6 @@ package mobtown.services.jaxrs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import mobtown.services.ObjectMapperFactory;
-import org.glassfish.hk2.utilities.Binder;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
@@ -14,14 +13,14 @@ import javax.ws.rs.core.Application;
  */
 public abstract class MobtownJerseyTest extends JerseyTest {
 
-    abstract Binder[] createModules();
+    abstract MobtownResourceConfig configureMobtownResourceConfig();
 
     @Override
     protected Application configure() {
         // set the port to 0 so that it will pick next available
         // this allows the build system to run parallel tests
         forceSet(TestProperties.CONTAINER_PORT, "0");
-        return new MobtownResourceConfig(createModules());
+        return configureMobtownResourceConfig();
     }
 
     @Override

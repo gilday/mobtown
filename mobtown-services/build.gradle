@@ -30,6 +30,7 @@ dependencies {
         exclude group: 'javax.servlet'
     }
     testCompile "org.glassfish.jersey.containers:jersey-container-jdk-http:$versions.jersey"
+    testCompile "org.hsqldb:hsqldb:$versions.hsqldb"
 }
 
 mainClassName = 'mobtown.services.App'
