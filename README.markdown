@@ -52,9 +52,8 @@ integrates all the mobtown services to work together for you.
    running. The build assumes that your user has access to the default docker
    socket running on localhost
 2. use the [Google API Console](https://console.developers.google.com/apis/dashboard)
-   to enable the Google Maps JavaScript API and visit the Credentials section to generate an API key.
-   Use this API key to create the environment variable
-   `MOBTOWN_GMAPS_API_KEY` to its value
+   to enable the Google Maps JavaScript API. Visit the Credentials section to generate an API key.
+   Create the environment variable `MOBTOWN_GMAPS_API_KEY` and set its value to the API key
 3. `./gradlew build dockerBuildImage` to run all tests and build artifacts
    including docker images
 4. `docker-compose up -d` to run all the mobtown docker images and their
