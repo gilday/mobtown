@@ -7,17 +7,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 class DBResetRule extends ExternalResource {
 
     private Logger log = LoggerFactory.getLogger(DBResetRule.class);
 
+    private EntityManagerFactory factory;
     private EntityManager em;
 
     @Before
     public void before() {
-        em = createEntityManager();
+        log.debug("creating entity manager");
+        factory = Persistence.createEntityManagerFactory("mobtown-test-pu");
+        em = factory.createEntityManager();
         em.getTransaction().begin();
         if (em.getTransaction().getRollbackOnly()) {
             em.getTransaction().rollback();
@@ -28,19 +32,6 @@ class DBResetRule extends ExternalResource {
 
     @After
     public void after() {
-        closeEntityManager();
-    }
-
-    public EntityManager getEntityManager() {
-        return em;
-    }
-
-    private EntityManager createEntityManager() {
-        log.debug("creating entity manager");
-        return Persistence.createEntityManagerFactory("mobtown-test-pu").createEntityManager();
-    }
-
-    private void closeEntityManager() {
         try {
             log.debug("tear down started, em=" + em);
             if (!em.getTransaction().isActive()) {
@@ -57,5 +48,10 @@ class DBResetRule extends ExternalResource {
             log.error("tear down failed", ex);
             throw ex;
         }
+        factory.close();
+    }
+
+    public EntityManager getEntityManager() {
+        return em;
     }
 }

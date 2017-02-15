@@ -28,7 +28,7 @@ public class SpecialEventsController {
     @GET
     public List<SpecialEventSummaryDTO> all() {
         // TODO replace naive implementation with a streaming implementation
-        return repository.all()
+        return repository.summaries()
                 .map(SpecialEventSummaryDTO::fromModel)
                 .toList()
                 .blockingGet();

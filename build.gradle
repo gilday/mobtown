@@ -25,6 +25,7 @@ ext {
             hibernate: '5.2.6.Final',
             hibernateValidator: '5.3.4.Final',
             hk2: '2.4.0',
+            hsqldb: '2.3.4',
             jackson: '2.8.5',
             jcommander: '1.58',
             jersey: '2.25',

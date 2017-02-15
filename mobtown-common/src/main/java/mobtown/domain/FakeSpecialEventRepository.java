@@ -24,4 +24,9 @@ public class FakeSpecialEventRepository implements SpecialEventRepository {
     public Optional<SpecialEvent> get(final String permitID) {
         return events.stream().filter(e -> e.getId().equals(permitID)).findFirst();
     }
+
+    @Override
+    public Observable<SpecialEventSummary> summaries() {
+        return all().map(SpecialEventSummary::fromModel);
+    }
 }

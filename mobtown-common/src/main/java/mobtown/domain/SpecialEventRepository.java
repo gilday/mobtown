@@ -16,4 +16,6 @@ public interface SpecialEventRepository {
     Observable<SpecialEvent> all();
 
     Optional<SpecialEvent> get(final String permitID);
+
+    Observable<SpecialEventSummary> summaries();
 }
