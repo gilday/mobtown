@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/gilday/mobtown.svg?branch=master)](https://travis-ci.org/gilday/mobtown)
 
 Example full-stack web app built to demonstrate a curated set of technologies.
-Mobtown explores Baltimore's public data sets for [Special Event
+mobtown explores Baltimore's public data sets for [Special Event
 Permits](https://data.baltimorecity.gov/Public-Works/Special-Event-Permits/cdz5-3y2u/data)
 and
 [Arrests](https://data.baltimorecity.gov/Public-Safety/BPD-Arrests/3i3v-ibrt)
@@ -21,7 +21,35 @@ with the following technologies:
   events
 
 
-## Getting Start (with Vagrant)
+## Components
+
+The mobtown application consists of several components
+
+1. mobtown-ingest: a command line application which queries all the Special
+   Events and Arrests from [Open Baltimore
+   datasets](https://data.baltimorecity.gov). It uses the Socrata Java API to
+   query the datasets, then saves the data models in MySQL using Java
+   Persistence API (JPA)
+2. mobtown-services: an HTTP API which provides access to the mobtown database
+3. mobtown-web: a browser application for visualizing the mobtown database
+
+The mobtown-ingest application populates the MySQL database. mobtown-web is a
+static web application served by the NGINX web server. NGINX does double duty as
+it also provides a reverse proxy for mobtown-services to address browsers'
+[same-origin
+policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)
+
+
+## Getting Started
+
+mobtown uses Gradle to build its components and it uses docker-compose for
+integration testing. This requires Java, Docker, and docker-compose to be
+installed and configured. Since this is a nontrivial set of dependencies, there
+is a Vagrantfile which defines a development VirtualBox VM for hacking on
+mobtown.
+
+
+### Building mobtown in a Vagrant VirtualBox VM (optional)
 
 The Vagrantfile defines an Ubuntu Xenial Xerus (16.04) vagrant box running on
 VirtualBox for hacking on mobtown. The ubuntu box installs Java 8 JDK,
@@ -42,10 +70,10 @@ you can still test the app at http://localhost:9000
 4. Follow "Getting Started (with docker)" starting with step (2)
 
 
-## Getting Started (with docker)
+### Getting Started (with docker)
 
-Running mobtown with docker is the easiest way to get started because
-it minimizes the number of dependencies you need to install and docker-compose
+Running mobtown with docker is the recommended way to get started because it
+minimizes the number of dependencies you need to install and docker-compose
 integrates all the mobtown services to work together for you.
 
 1. install Java 8 JDK, docker, and docker-compose. Make sure the docker service is
@@ -64,7 +92,7 @@ integrates all the mobtown services to work together for you.
    ingest`
 
 
-## Getting Started (without docker)
+### Getting Started (without docker)
 
 No docker? You can still run mobtown by running a few services and configuring
 them to communicate with each other.
@@ -94,7 +122,7 @@ them to communicate with each other.
 
 ## Why is it called "mobtown"?
 
-"Mobtown" is a [historical nickname for Baltimore, MD](https://en.wikipedia.org/wiki/List_of_city_nicknames_in_Maryland).
+"mobtown" is a [historical nickname for Baltimore, MD](https://en.wikipedia.org/wiki/List_of_city_nicknames_in_Maryland).
 This example web app explores Baltimore's [Special Events Permits](https://data.baltimorecity.gov/Public-Works/Special-Event-Permits/cdz5-3y2u/data)
 public data set. One might playfully refer to a rowdy festival in Baltimore as a
 "mob"
