@@ -24,7 +24,7 @@ with the following technologies:
 ## Getting Start (with Vagrant)
 
 The Vagrantfile defines an Ubuntu Xenial Xerus (16.04) vagrant box running on
-VirtualBox for hacking on mobtown. The ubuntu box installs Java 8,
+VirtualBox for hacking on mobtown. The ubuntu box installs Java 8 JDK,
 docker-engine, and docker-compose so you can hack on and build mobtown without
 mucking with your development environment. Vagrant will [use rsync to
 share](https://www.vagrantup.com/docs/synced-folders/rsync.html) the
@@ -48,12 +48,12 @@ Running mobtown with docker is the easiest way to get started because
 it minimizes the number of dependencies you need to install and docker-compose
 integrates all the mobtown services to work together for you.
 
-1. install Java 8, docker, and docker-compose. Make sure the docker service is
+1. install Java 8 JDK, docker, and docker-compose. Make sure the docker service is
    running. The build assumes that your user has access to the default docker
    socket running on localhost
 2. use the [Google API Console](https://console.developers.google.com/apis/dashboard)
-   to generate a Google Maps JavaScript API key and set environment variable
-   `MOBTOWN_GMAPS_API_KEY` to its value
+   to enable the Google Maps JavaScript API. Visit the Credentials section to generate an API key.
+   Create the environment variable `MOBTOWN_GMAPS_API_KEY` and set its value to the API key
 3. `./gradlew build dockerBuildImage` to run all tests and build artifacts
    including docker images
 4. `docker-compose up -d` to run all the mobtown docker images and their
@@ -69,7 +69,7 @@ integrates all the mobtown services to work together for you.
 No docker? You can still run mobtown by running a few services and configuring
 them to communicate with each other.
 
-1. install Java 8
+1. install Java 8 JDK
 2. use the [Google API Console](https://console.developers.google.com/apis/dashboard)
    to generate a Google Maps JavaScript API key and set environment variable
    `MOBTOWN_GMAPS_API_KEY` to its value
