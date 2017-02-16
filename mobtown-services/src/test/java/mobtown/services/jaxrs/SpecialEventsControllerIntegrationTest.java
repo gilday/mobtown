@@ -1,5 +1,6 @@
 package mobtown.services.jaxrs;
 
+import mobtown.services.FakeData;
 import mobtown.services.dto.SpecialEventDTO;
 import org.junit.Test;
 
@@ -32,5 +33,29 @@ public class SpecialEventsControllerIntegrationTest extends MobtownJerseyTest {
 
         // THEN returns 400 Bad Request
         assertThat(response.getStatus()).isEqualTo(400);
+    }
+
+    @Test
+    public void it_deletes_special_events() {
+        // GIVEN there is an event in the database with ID "fake-permit-id"
+        final SpecialEventDTO event = FakeData.createSpecialEventDTO();
+        Response response = target("/api/events/fake-permit-id")
+                .request()
+                .buildPut(Entity.entity(event, MediaType.APPLICATION_JSON_TYPE))
+                .invoke();
+        assertThat(response.getStatus()).isEqualTo(204);
+
+        // WHEN delete event
+        target("/api/events/fake-permit-id")
+                .request()
+                .buildDelete()
+                .invoke();
+
+        // THEN requests for the event return 404
+        response = target("/api/events/fake-permit-id")
+                .request()
+                .buildGet()
+                .invoke();
+        assertThat(response.getStatus()).isEqualTo(404);
     }
 }

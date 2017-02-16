@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 <tr data-ng-repeat="event in $ctrl.results | orderBy : $ctrl.sortBy : $ctrl.reverse | limitTo : 8">
-                    <td><a ui-sref="home.event({ permitID: event.permitID })">{{ event.name }}</a></td>
+                    <td><a class="icon" ng-click="$ctrl.delete(event)"><i class="fa fa-trash"></i></a> <a ui-sref="home.event({ permitID: event.permitID })">{{ event.name }}</a></td>
                     <td>{{ event.start | date : 'mediumDate' }}</td>
                     <td>{{ event.duration }} days</td>
                     <td>{{ event.arrestsCount }}</td>

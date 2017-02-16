@@ -1,6 +1,7 @@
 package mobtown.services;
 
 import mobtown.domain.SpecialEvent;
+import mobtown.services.dto.SpecialEventDTO;
 
 import java.time.LocalDateTime;
 
@@ -27,5 +28,9 @@ public class FakeData {
                 LocalDateTime.of(2016, 12, 31, 23, 51),
                 "(39.3166584878, -76.5953503430)");
         return event;
+    }
+
+    public static SpecialEventDTO createSpecialEventDTO() {
+        return SpecialEventDTO.fromModel(createSpecialEvent());
     }
 }

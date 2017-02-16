@@ -1,6 +1,10 @@
 const template = require('./search-events.tpl.html')
 
 class SearchEventsController {
+  constructor (eventsService) {
+    this.eventsService = eventsService
+  }
+
   $onInit () {
     this.events = this.events.map(e => ({
       permitID: e.permitID,
@@ -20,6 +24,17 @@ class SearchEventsController {
     this.results = this.events.filter(e => re.test(e.name))
   }
 
+  delete (event) {
+    this.eventsService.delete(event).then(() => {
+      [this.events, this.results].forEach(arry => {
+        const idx = arry.indexOf(event)
+        if (idx >= 0) {
+          arry.splice(idx, 1)
+        }
+      })
+    })
+  }
+
   sort (sortBy) {
     if (this.sortBy === sortBy) {
       // change direction
@@ -35,6 +50,6 @@ module.exports = {
   bindings: {
     events: '<'
   },
-  controller: SearchEventsController,
+  controller: ['eventsService', SearchEventsController],
   template
 }

@@ -8,7 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaQuery;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -53,5 +54,15 @@ public class SpecialEventRepositoryImpl implements SpecialEventRepository {
     @Override
     public Observable<SpecialEventSummary> summaries() {
         return Observable.fromIterable(summaryQuery.getResultList());
+    }
+
+    @Override
+    public void delete(final String permitID) {
+        final Optional<SpecialEvent> event = get(permitID);
+        if (event.isPresent()) {
+            em.remove(event.get());
+        } else {
+            throw new NoSuchElementException("no event exists with id " + permitID);
+        }
     }
 }

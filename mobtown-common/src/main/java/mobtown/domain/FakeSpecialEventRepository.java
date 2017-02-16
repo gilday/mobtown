@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class FakeSpecialEventRepository implements SpecialEventRepository {
@@ -28,5 +29,15 @@ public class FakeSpecialEventRepository implements SpecialEventRepository {
     @Override
     public Observable<SpecialEventSummary> summaries() {
         return all().map(SpecialEventSummary::fromModel);
+    }
+
+    @Override
+    public void delete(final String permitID) {
+        final Optional<SpecialEvent> event = get(permitID);
+        if (event.isPresent()) {
+            events.remove(event.get());
+        } else {
+            throw new NoSuchElementException("no such event with ID " + permitID);
+        }
     }
 }

@@ -26,6 +26,10 @@ function eventsServiceFactory ($http) {
 
     save (event) {
       return $http.put(`${eventsUrl}/${event.permitID}`, event)
+    },
+
+    delete (event) {
+      return $http.delete(`${eventsUrl}/${event.permitID}`)
     }
   }
 }

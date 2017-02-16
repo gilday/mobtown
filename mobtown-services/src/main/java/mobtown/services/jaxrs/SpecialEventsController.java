@@ -51,4 +51,10 @@ public class SpecialEventsController {
         final SpecialEvent event = new SpecialEvent(dto.permitID, dto.name, dto.type, dto.start, dto.end);
         repository.add(event);
     }
+
+    @DELETE
+    @Path("/{permitID}")
+    public void delete(@PathParam("permitID") final String permitID) {
+        repository.delete(permitID);
+    }
 }

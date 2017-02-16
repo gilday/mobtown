@@ -18,4 +18,6 @@ public interface SpecialEventRepository {
     Optional<SpecialEvent> get(final String permitID);
 
     Observable<SpecialEventSummary> summaries();
+
+    void delete(final String permitID);
 }
